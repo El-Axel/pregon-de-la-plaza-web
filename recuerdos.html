@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Chaza | Pregón de la Plaza</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Fredoka:wght@400;500;600;700&family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav-brutal">
+  <a href="index.html" class="nav-logo-link">
+    <img src="imagenes/logo-(Grande).png" alt="Logo Pregón de la Plaza" class="nav-logo">
+  </a>
+  <div class="nav-actions">
+    <a href="galeria.html" class="btn-muro-nav" aria-label="Ir al muro colectivo">
+      <img src="IMAGENES/canasta-icono.png" alt="Canasta" class="icono-canasta">
+    </a>
+    <button class="fruit-trigger" id="menuTrigger" aria-label="Abrir menú">
+      <svg viewBox="0 0 100 100" width="65" height="65" xmlns="http://www.w3.org/2000/svg" class="fruit-icon">
+          <polygon points="30,90 12,65 15,30 40,15 75,20 90,45 80,80 55,95" fill="#de0636" />
+          <polygon points="45,15 52,28 75,22 60,38 72,55 52,48 48,65 40,48 20,50 35,38 22,22 40,28" fill="#118a5f" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="index.html" class="menu-link">ARCHIVO</a>
+          <p class="menu-desc">La memoria visual y el bullicio de nuestros mercados, guardados pa' que no se pierdan.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/NIña (Grande).JPG" class="tile tile-1" alt="Archivo visual">
+          <img src="imagenes/Carga 1 (Grande).JPG" class="tile tile-2" alt="Documentación">
+          <img src="imagenes/Hojas (Grande).JPG" class="tile tile-3" alt="Saberes">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="plazas.html" class="menu-link">PLAZAS</a>
+          <p class="menu-desc">Paseate por las galerías y mercados que le dan de comer a todo el Eje Cafetero.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/cajas moradas (Grande).JPG" class="tile tile-1" alt="Plaza 1">
+          <img src="imagenes/Carro (Grande).JPG" class="tile tile-2" alt="Plaza 2">
+          <img src="imagenes/Papa y canasta (Grande).JPG" class="tile tile-3" alt="Plaza 3">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="narrativas.html" class="menu-link">NARRATIVAS</a>
+          <p class="menu-desc">La película 'El Orden Invisible' y los audios de la gente que camella en los pasillos.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Carga 4 (Grande).JPG" class="tile tile-1" alt="Documental">
+          <img src="imagenes/Frijol manos (Grande).JPG" class="tile tile-2" alt="Podcast">
+          <img src="imagenes/Carga 2 (Grande).JPG" class="tile tile-3" alt="Cine">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="mapa.html" class="menu-link">MAPA</a>
+          <p class="menu-desc">Ubicá las 14 plazas que tenemos mapeadas y caé a visitarlas.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Mango1 (Grande).JPG" class="tile tile-1" alt="Cartografía">
+          <img src="imagenes/Tomate (Grande).JPG" class="tile tile-2" alt="Ubicación">
+          <img src="imagenes/Platanos 2 (Grande).JPG" class="tile tile-3" alt="Territorio">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="nosotros.html" class="menu-link">NOSOTROS</a>
+          <p class="menu-desc">Los tres pelados apasionados por recoger y contar la memoria de nuestra tierra.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="IMAGENES/Alex.JPG" class="tile tile-1" alt="Equipo 1">
+          <img src="IMAGENES/Wilmer.JPG" class="tile tile-2" alt="Equipo 2">
+          <img src="IMAGENES/Salome.JPG" class="tile tile-3" alt="Equipo 3">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="recuerdos.html" class="menu-link">RECUERDOS</a>
+          <p class="menu-desc">Llevate un fanzine o unas postales y ayudanos a seguir contando historias.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Banano (Grande).JPG" class="tile tile-1" alt="Fanzine">
+          <img src="imagenes/Canasta 1 (Grande).JPG" class="tile tile-2" alt="Postales">
+          <img src="imagenes/Canas 2 (Grande).JPG" class="tile tile-3" alt="Impresos">
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="menu-overlay" id="menuOverlay">
+    </div>
+
+<section class="tienda-hero gsap-reveal">
+    <div class="tag-sticker bg-red text-bone">APOYA EL PROYECTO</div>
+    <h1 class="tienda-title">
+        LA CHAZA<br>
+        <span class="accent-script accent-yellow">de Recuerdos</span>
+    </h1>
+    <p class="tienda-intro">Lleva la memoria gráfica de nuestras plazas a tu casa. Todo lo recaudado nos ayuda a seguir documentando y contando las historias de nuestra tierra.</p>
+</section>
+
+<section class="productos-grid-wrap gsap-reveal">
+    <div class="productos-grid">
+        
+        <div class="producto-card">
+            <div class="producto-img-wrap bg-yellow">
+                <div class="agotado-badge" style="display: none;">AGOTADO</div>
+                <img src="imagenes/Banano (Grande).JPG" alt="Fanzine El Pregón" class="producto-img">
+            </div>
+            <div class="producto-info">
+                <span class="tag-sticker" style="background: var(--carbon) !important; color: var(--yellow) !important; align-self: flex-start;">EDICIÓN LIMITADA</span>
+                <h2 class="producto-nombre">FANZINE "EL PREGÓN"</h2>
+                <p class="producto-desc">32 páginas de pura gráfica popular, crónicas de la madrugada y fotografías exclusivas de Mercasa y La Minorista. Impreso en papel bond ecológico.</p>
+                <div class="producto-compra">
+                    <span class="producto-precio">$25.000</span>
+                    <button class="btn-carbon-hover">AGREGAR 🛒</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="producto-card">
+            <div class="producto-img-wrap bg-green">
+                <img src="imagenes/Canasta 1 (Grande).JPG" alt="Set de Postales" class="producto-img">
+            </div>
+            <div class="producto-info">
+                <span class="tag-sticker" style="background: var(--carbon) !important; color: var(--bone) !important; align-self: flex-start;">PACK X 5</span>
+                <h2 class="producto-nombre">SET DE POSTALES</h2>
+                <p class="producto-desc">Cinco fotografías icónicas del proyecto listas para enmarcar o enviar. Capturas de rostros, abundancia y texturas del mercado.</p>
+                <div class="producto-compra">
+                    <span class="producto-precio">$15.000</span>
+                    <button class="btn-carbon-hover">AGREGAR 🛒</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="producto-card">
+            <div class="producto-img-wrap bg-red">
+                <img src="imagenes/Tomate.JPG" alt="Afiche Brutalista" class="producto-img">
+            </div>
+            <div class="producto-info">
+                <span class="tag-sticker" style="background: var(--carbon) !important; color: var(--red) !important; align-self: flex-start;">SERIGRAFÍA</span>
+                <h2 class="producto-nombre">EL COMBO</h2>
+                <p class="producto-desc">Lleva el gran combo de fanzine y postales a un mejor precio.</p>
+                <div class="producto-compra">
+                    <span class="producto-precio">$35.000</span>
+                    <button class="btn-carbon-hover">AGREGAR 🛒</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="java.js"></script>
+</body>
+</html>
