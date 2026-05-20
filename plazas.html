@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plazas de Mercado | Pregón de la Plaza</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav-brutal">
+  <a href="index.html" class="nav-logo-link">
+    <img src="imagenes/logo (Grande).png" alt="Logo Pregón de la Plaza" class="nav-logo">
+  </a>
+  <button class="fruit-trigger" id="menuTrigger" aria-label="Abrir menú">
+    <svg viewBox="0 0 100 100" width="65" height="65" xmlns="http://www.w3.org/2000/svg" class="fruit-icon">
+        <polygon points="30,90 12,65 15,30 40,15 75,20 90,45 80,80 55,95" fill="#de0636" />
+        <polygon points="45,15 52,28 75,22 60,38 72,55 52,48 48,65 40,48 20,50 35,38 22,22 40,28" fill="#118a5f" />
+    </svg>
+  </button>
+</header>
+
+<section class="plazas-hero-human">
+  <div class="human-hero-layout">
+    <div class="human-text-side">
+      <span class="tag-sticker" style="background-color: var(--red) !important; color: var(--bone) !important;">REGISTRO DE CAMPO</span>
+      <h1 class="human-title text-carbon">El barrio<br><span class="accent-script accent-green">más grande</span></h1>
+      <p class="human-body text-carbon">
+        Olvidate del mapa por un momento. Aquí vinimos a conocer el ladrillo, los pasillos y la gente que sostiene la soberanía alimentaria de nuestras ciudades. Explorá las carpetas de investigación de cada plaza.
+      </p>
+      <div class="scroll-hint mt-4">
+        <span class="arrow-down text-red">↓</span> <span class="text-carbon font-bold" style="font-family: var(--font-disp);">ABRIR ARCHIVADORES</span>
+      </div>
+    </div>
+
+    <div class="human-visual-side">
+      <div class="photo-stack">
+        <div class="photo-card p-3"><img src="IMAGENES/Hojas.JPG"><div class="photo-caption">Santa Rosa</div></div>
+        <div class="photo-card p-2"><img src="IMAGENES/cajas moradas.JPG"><div class="photo-caption">Mercasa</div></div>
+        <div class="photo-card p-1"><img src="IMAGENES/Papa y canasta.JPG"><div class="photo-caption">Minorista Impala</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="directorio-section">
+  <div class="directorio-container">
+    
+    <article class="plaza-folder-card">
+      <div class="folder-img-wrap">
+        <img src="IMAGENES/Papa y canasta.JPG" alt="Minorista Impala" class="folder-img">
+        <span class="folder-badge bg-yellow text-carbon">PEREIRA</span>
+      </div>
+      <div class="folder-meta">
+        <h2 class="folder-title">Minorista Impala</h2>
+        <p class="folder-desc">El trato bacano, el fiado y el mercado tradicional al detal en pleno centro urbano.</p>
+        <button class="btn-open-expediente" data-plaza="impala">ABRIR EXPEDIENTE →</button>
+      </div>
+    </article>
+
+    <article class="plaza-folder-card">
+      <div class="folder-img-wrap">
+        <img src="IMAGENES/cajas moradas.JPG" alt="Mercasa" class="folder-img">
+        <span class="folder-badge bg-red text-bone">PEREIRA</span>
+      </div>
+      <div class="folder-meta">
+        <h2 class="folder-title">Mercasa Mayorista</h2>
+        <p class="folder-desc">El monstruo logístico de la madrugada. Toneladas de comida moviéndose a las 3:00 AM.</p>
+        <button class="btn-open-expediente" data-plaza="mercasa">ABRIR EXPEDIENTE →</button>
+      </div>
+    </article>
+
+    <article class="plaza-folder-card">
+      <div class="folder-img-wrap">
+        <img src="IMAGENES/Hojas.JPG" alt="Galería Santa Rosa" class="folder-img">
+        <span class="folder-badge bg-green text-bone">STA ROSA</span>
+      </div>
+      <div class="folder-meta">
+        <h2 class="folder-title">Galería Santa Rosa</h2>
+        <p class="folder-desc">Tradición campesina intacta, aroma a café, hierbas medicinales y chorizos colgados.</p>
+        <button class="btn-open-expediente" data-plaza="santarosa">ABRIR EXPEDIENTE →</button>
+      </div>
+    </article>
+
+    <article class="plaza-folder-card">
+      <div class="folder-img-wrap">
+        <img src="IMAGENES/Tomate.JPG" alt="Plaza de Cartago" class="folder-img">
+        <span class="folder-badge bg-carbon text-bone">CARTAGO</span>
+      </div>
+      <div class="folder-meta">
+        <h2 class="folder-title">Plaza de Cartago</h2>
+        <p class="folder-desc">Resistencia en el norte del Valle. Un punto clave que conecta el agro regional.</p>
+        <button class="btn-open-expediente" data-plaza="cartago">ABRIR EXPEDIENTE →</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<div class="expediente-modal-overlay" id="plazaModal">
+  <div class="expediente-modal-box">
+    <button class="modal-close-btn" id="closeModal">×</button>
+    
+    <div class="modal-doc-header">
+      <span class="modal-doc-id" id="modalDocId">EXPEDIENTE Nº 00</span>
+      <h2 class="modal-doc-title" id="modalTitle">PLAZA DE MERCADO</h2>
+      <div class="modal-doc-city" id="modalCity">UBICACIÓN</div>
+    </div>
+
+    <div class="modal-doc-body">
+      <div class="modal-top-row">
+        <div class="modal-video-container">
+          <div class="video-iframe-holder" id="modalVideoHolder">
+            <span class="text-bone">CARGANDO REPRODUCTOR...</span>
+          </div>
+        </div>
+        <div class="modal-fast-facts bg-carbon text-bone">
+          <h4 class="accent-yellow">FICHA TÉCNICA</h4>
+          <ul class="facts-list" id="modalFactsList">
+            </ul>
+        </div>
+      </div>
+
+
+      <div class="modal-report-section text-carbon">
+
+       <div class="modal-report-section text-carbon">
+
+        <h3>INFORME DE INMERSIÓN</h3>
+        <p id="modalLongDesc">Crónica de la plaza...</p>
+      </div>
+
+      <div class="modal-gallery-section text-carbon">
+        <h3>EVIDENCIA FOTOGRÁFICA</h3>
+        <div class="modal-images-grid" id="modalGalleryGrid">
+          </div>
+      </div>
+    </div>
+
+    <div class="modal-doc-footer">
+      <div class="stamp-verified">ARCHIVO PREGÓN</div>
+      <a href="#" target="_blank" class="btn-external-plaza" id="modalExternalLink">VISITAR WEB DE LA PLAZA ↗️</a>
+    </div>
+  </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="java.js"></script>
+</body>
+</html>

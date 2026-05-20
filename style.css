@@ -3530,3 +3530,255 @@ p, h1, h2, h3, .texto-informativo {
   transition: all 0.2s ease;
 }
 
+
+/* ============================================
+   DIRECTORIO DE PLAZAS: CARPETAS Y POPUP MODAL
+   ============================================ */
+
+.directorio-section {
+  padding: 100px 40px;
+  background-color: var(--bone);
+  border-top: 4px solid var(--carbon);
+}
+
+.directorio-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* --- La Tarjeta Carpeta --- */
+.plaza-folder-card {
+  background: var(--bone);
+  border: 4px solid var(--carbon);
+  box-shadow: 10px 10px 0px var(--carbon);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.plaza-folder-card:hover {
+  transform: translateY(-8px) rotate(0.5deg);
+  box-shadow: 15px 15px 0px var(--green); /* Cambia de sombra al pasar por encima */
+}
+
+.folder-img-wrap {
+  position: relative;
+  height: 230px;
+  border-bottom: 4px solid var(--carbon);
+  overflow: hidden;
+}
+
+.folder-img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(40%);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+
+.plaza-folder-card:hover .folder-img {
+  transform: scale(1.05);
+  filter: grayscale(0%);
+}
+
+.folder-badge {
+  position: absolute;
+  top: 15px; right: 15px;
+  font-family: var(--font-disp);
+  font-size: 12px; font-weight: 700;
+  padding: 4px 10px;
+  border: 2px solid var(--carbon);
+  box-shadow: 3px 3px 0px var(--carbon);
+  letter-spacing: 0.05em;
+}
+
+.folder-meta {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.folder-title {
+  font-family: var(--font-disp);
+  font-size: 32px;
+  color: var(--carbon);
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin-bottom: 15px;
+}
+
+.folder-desc {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--carbon-light);
+  line-height: 1.5;
+  margin-bottom: 25px;
+  flex-grow: 1;
+}
+
+.btn-open-expediente {
+  font-family: var(--font-disp);
+  font-size: 14px; font-weight: 700;
+  color: var(--carbon);
+  text-align: left;
+  border-top: 2px dashed rgba(var(--rgb-carbon), 0.3);
+  padding-top: 15px;
+  width: 100%;
+}
+.btn-open-expediente:hover {
+  color: var(--red);
+}
+
+/* ============================================
+   EL POPUP MODAL (EL ARCHIVO DESCLASIFICADO)
+   ============================================ */
+.expediente-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(var(--rgb-carbon), 0.96);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.expediente-modal-overlay.is-open {
+  opacity: 1; pointer-events: auto;
+}
+
+.expediente-modal-box {
+  background: var(--bone);
+  width: 95%; max-width: 1100px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border: 4px solid var(--carbon);
+  box-shadow: 25px 25px 0px var(--carbon);
+  position: relative;
+  transform: translateY(40px);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.expediente-modal-overlay.is-open .expediente-modal-box {
+  transform: translateY(0);
+}
+
+/* Botón cerrar rudo */
+.modal-close-btn {
+  position: sticky; top: 0; float: right;
+  background: var(--red); color: var(--bone);
+  width: 50px; height: 50px;
+  font-size: 35px; line-height: 1;
+  border-left: 4px solid var(--carbon);
+  border-bottom: 4px solid var(--carbon);
+  z-index: 50;
+}
+.modal-close-btn:hover { background: var(--carbon); }
+
+/* Encabezado Documento */
+.modal-doc-header {
+  padding: 40px 50px 25px;
+  border-bottom: 4px solid var(--carbon);
+}
+.modal-doc-id {
+  font-family: monospace; font-weight: bold;
+  font-size: 13px; color: var(--red);
+  letter-spacing: 0.1em; display: block; margin-bottom: 10px;
+}
+.modal-doc-title {
+  font-family: var(--font-disp);
+  font-size: clamp(40px, 6vw, 75px);
+  line-height: 0.85; color: var(--carbon);
+  text-transform: uppercase;
+}
+.modal-doc-city {
+  font-family: var(--font-body); font-weight: 700;
+  font-size: 14px; color: var(--green);
+  letter-spacing: 0.1em; margin-top: 10px;
+}
+
+/* Cuerpo del reporte */
+.modal-doc-body { padding: 40px 50px; }
+
+.modal-top-row {
+  display: grid; grid-template-columns: 1.5fr 1fr;
+  gap: 30px; margin-bottom: 40px;
+}
+
+.modal-video-container {
+  border: 4px solid var(--carbon);
+  box-shadow: 8px 8px 0px var(--carbon);
+  aspect-ratio: 16 / 9;
+  background: #000; position: relative;
+}
+.video-iframe-holder { width: 100%; height: 100%; }
+.video-iframe-holder iframe { width: 100%; height: 100%; border: none; }
+
+.modal-fast-facts {
+  padding: 25px; border: 4px solid var(--carbon);
+}
+.modal-fast-facts h4 {
+  font-family: var(--font-disp); font-size: 16px;
+  letter-spacing: 0.1em; margin-bottom: 15px;
+}
+.facts-list {
+  list-style: none; display: flex; flex-direction: column; gap: 12px;
+}
+.facts-list li {
+  font-family: var(--font-body); font-size: 14px;
+  border-bottom: 1px dashed rgba(var(--rgb-bone), 0.2);
+  padding-bottom: 6px;
+}
+
+.modal-report-section h3, .modal-gallery-section h3 {
+  font-family: var(--font-disp); font-size: 24px;
+  border-bottom: 2px dashed var(--carbon);
+  padding-bottom: 10px; margin-bottom: 20px;
+}
+.modal-report-section p {
+  font-family: var(--font-body); font-size: 17px;
+  line-height: 1.6; margin-bottom: 40px;
+}
+
+/* Galería de Fotos internas */
+.modal-images-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.modal-images-grid img {
+  width: 100%; height: 180px; object-fit: cover;
+  border: 3px solid var(--carbon);
+  filter: grayscale(30%);
+}
+
+/* Pie de documento */
+.modal-doc-footer {
+  padding: 30px 50px;
+  border-top: 4px solid var(--carbon);
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(var(--rgb-carbon), 0.02);
+}
+.stamp-verified {
+  border: 3px solid var(--red); color: var(--red);
+  font-family: var(--font-disp); font-size: 16px;
+  font-weight: 700; padding: 6px 12px; transform: rotate(-4deg);
+}
+.btn-external-plaza {
+  font-family: var(--font-disp); font-size: 15px; font-weight: 700;
+  background: var(--green); color: var(--bone);
+  padding: 14px 28px; border: 3px solid var(--carbon);
+  box-shadow: 6px 6px 0px var(--carbon);
+}
+.btn-external-plaza:hover {
+  background: var(--yellow); color: var(--carbon);
+  transform: translate(-2px, -2px); box-shadow: 8px 8px 0px var(--carbon);
+}
+
+
+/* Responsive modal */
+@media (max-width: 850px) {
+  .modal-top-row { grid-template-columns: 1fr; }
+  .modal-doc-body, .modal-doc-header, .modal-doc-footer { padding: 25px 20px; }
+  .modal-images-grid { grid-template-columns: 1fr; }
+  .modal-doc-footer { flex-direction: column; gap: 25px; text-align: center; }
+}
