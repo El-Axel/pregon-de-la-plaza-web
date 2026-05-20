@@ -1,6 +1,9 @@
 /* ==============================
    PAGINA NOSOTROS
    ============================== */
+.bg-red { background-color: var(--red); }
+.bg-green { background-color: var(--green); }
+
 .nosotros-cinematic-hero {
   position: relative;
   min-height: 100vh;

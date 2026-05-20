@@ -976,8 +976,6 @@ p, h1, h2, h3, .texto-informativo {
 }
 
 .bg-yellow { background-color: var(--yellow); }
-.bg-red { background-color: var(--red); }
-.bg-green { background-color: var(--green); }
 .text-carbon { color: var(--carbon) !important; }
 
 /* Ajuste tipográfico interno */
@@ -3531,3 +3529,4 @@ p, h1, h2, h3, .texto-informativo {
   transform: scale(1.02);
   transition: all 0.2s ease;
 }
+
