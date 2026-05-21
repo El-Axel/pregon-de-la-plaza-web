@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: 'Grota Rounded';
-  src: url('fonts/GrotaRounded.ttf') format('truetype');
+  src: url('font/zgrotarounded.otf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -57,7 +57,7 @@
   /* Fuentes oficiales de la marca con fallbacks de Google Fonts para web */
   
   /* Grota Rounded / Flegri: Formas inusuales, cartelismo popular y solidez */
-  --font-disp: 'Flegri', 'Grota Rounded', 'Fredoka', sans-serif; 
+  --font-disp: 'Grota Rounded', 'Flegri', 'Fredoka', sans-serif; 
   
   /* Pangram Sans: Base del sistema, lectura clara y neutral */
   --font-body: 'Pangram Sans', 'DM Sans', sans-serif; 
