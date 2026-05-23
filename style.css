@@ -28,6 +28,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'GreatlyDEMO';
+  src: url('fonts/GreatlyDEMO.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ===============================
    IDENTIDAD VISUAL & TOKENS
    =============================== */
@@ -57,14 +65,19 @@
   /* Fuentes oficiales de la marca con fallbacks de Google Fonts para web */
   
   /* Grota Rounded / Flegri: Formas inusuales, cartelismo popular y solidez */
-  --font-disp: 'Grota Rounded', 'Flegri', 'Fredoka', sans-serif; 
+  --font-disp: 'Grota Rounded', 'flegrei', 'Fredoka', sans-serif; 
   
   /* Pangram Sans: Base del sistema, lectura clara y neutral */
   --font-body: 'Pangram Sans', 'DM Sans', sans-serif; 
   
   /* Letra manual para acentos (La usamos en los "spans" divertidos) */
   --font-script: 'Yellowtail', cursive; 
-}
+
+  --font-special: 'flegrei', sans-serif;
+
+  --font-manuscrita: 'GreatlyDEMO', serif;
+
+  }
 
 /* ===========
    RESET CSS
@@ -489,7 +502,7 @@ p, h1, h2, h3, .texto-informativo {
 }
 
 .hero-script {
-  font-family: var(--font-script);
+  font-family: var(--font-manuscrita);
   font-size: clamp(60px, 9vw, 110px);
   color: var(--red);
   text-transform: lowercase;
@@ -500,6 +513,7 @@ p, h1, h2, h3, .texto-informativo {
 
 .hero-highlight {
   color: var(--bone);
+  font-family: var(--font-special);
 }
 
 .hero-body {
