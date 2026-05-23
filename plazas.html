@@ -4,146 +4,311 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plazas de Mercado | Pregón de la Plaza</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="nav-brutal">
   <a href="index.html" class="nav-logo-link">
-    <img src="imagenes/logo (Grande).png" alt="Logo Pregón de la Plaza" class="nav-logo">
+    <img src="imagenes/logo-(Grande).png" alt="Logo Pregón de la Plaza" class="nav-logo">
   </a>
+  
+  <div class="nav-actions">
+  
+  <a href="galeria.html" class="btn-muro-nav" aria-label="Ir al muro colectivo">
+    <img src="IMAGENES/canasta-icono.png" alt="Canasta" class="icono-canasta">
+  </a>
+  
   <button class="fruit-trigger" id="menuTrigger" aria-label="Abrir menú">
     <svg viewBox="0 0 100 100" width="65" height="65" xmlns="http://www.w3.org/2000/svg" class="fruit-icon">
         <polygon points="30,90 12,65 15,30 40,15 75,20 90,45 80,80 55,95" fill="#de0636" />
         <polygon points="45,15 52,28 75,22 60,38 72,55 52,48 48,65 40,48 20,50 35,38 22,22 40,28" fill="#118a5f" />
     </svg>
   </button>
+  
+</div>
 </header>
 
-<section class="plazas-hero-human">
-  <div class="human-hero-layout">
-    <div class="human-text-side">
-      <span class="tag-sticker" style="background-color: var(--red) !important; color: var(--bone) !important;">REGISTRO DE CAMPO</span>
-      <h1 class="human-title text-carbon">El barrio<br><span class="accent-script accent-green">más grande</span></h1>
-      <p class="human-body text-carbon">
-        Olvidate del mapa por un momento. Aquí vinimos a conocer el ladrillo, los pasillos y la gente que sostiene la soberanía alimentaria de nuestras ciudades. Explorá las carpetas de investigación de cada plaza.
-      </p>
-      <div class="scroll-hint mt-4">
-        <span class="arrow-down text-red">↓</span> <span class="text-carbon font-bold" style="font-family: var(--font-disp);">ABRIR ARCHIVADORES</span>
-      </div>
-    </div>
 
-    <div class="human-visual-side">
-      <div class="photo-stack">
-        <div class="photo-card p-3"><img src="IMAGENES/Hojas.JPG"><div class="photo-caption">Santa Rosa</div></div>
-        <div class="photo-card p-2"><img src="IMAGENES/cajas moradas.JPG"><div class="photo-caption">Mercasa</div></div>
-        <div class="photo-card p-1"><img src="IMAGENES/Papa y canasta.JPG"><div class="photo-caption">Minorista Impala</div></div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="directorio-section">
-  <div class="directorio-container">
-    
-    <article class="plaza-folder-card">
-      <div class="folder-img-wrap">
-        <img src="IMAGENES/Papa y canasta.JPG" alt="Minorista Impala" class="folder-img">
-        <span class="folder-badge bg-yellow text-carbon">PEREIRA</span>
-      </div>
-      <div class="folder-meta">
-        <h2 class="folder-title">Minorista Impala</h2>
-        <p class="folder-desc">El trato bacano, el fiado y el mercado tradicional al detal en pleno centro urbano.</p>
-        <button class="btn-open-expediente" data-plaza="impala">ABRIR EXPEDIENTE →</button>
-      </div>
-    </article>
-
-    <article class="plaza-folder-card">
-      <div class="folder-img-wrap">
-        <img src="IMAGENES/cajas moradas.JPG" alt="Mercasa" class="folder-img">
-        <span class="folder-badge bg-red text-bone">PEREIRA</span>
-      </div>
-      <div class="folder-meta">
-        <h2 class="folder-title">Mercasa Mayorista</h2>
-        <p class="folder-desc">El monstruo logístico de la madrugada. Toneladas de comida moviéndose a las 3:00 AM.</p>
-        <button class="btn-open-expediente" data-plaza="mercasa">ABRIR EXPEDIENTE →</button>
-      </div>
-    </article>
-
-    <article class="plaza-folder-card">
-      <div class="folder-img-wrap">
-        <img src="IMAGENES/Hojas.JPG" alt="Galería Santa Rosa" class="folder-img">
-        <span class="folder-badge bg-green text-bone">STA ROSA</span>
-      </div>
-      <div class="folder-meta">
-        <h2 class="folder-title">Galería Santa Rosa</h2>
-        <p class="folder-desc">Tradición campesina intacta, aroma a café, hierbas medicinales y chorizos colgados.</p>
-        <button class="btn-open-expediente" data-plaza="santarosa">ABRIR EXPEDIENTE →</button>
-      </div>
-    </article>
-
-    <article class="plaza-folder-card">
-      <div class="folder-img-wrap">
-        <img src="IMAGENES/Tomate.JPG" alt="Plaza de Cartago" class="folder-img">
-        <span class="folder-badge bg-carbon text-bone">CARTAGO</span>
-      </div>
-      <div class="folder-meta">
-        <h2 class="folder-title">Plaza de Cartago</h2>
-        <p class="folder-desc">Resistencia en el norte del Valle. Un punto clave que conecta el agro regional.</p>
-        <button class="btn-open-expediente" data-plaza="cartago">ABRIR EXPEDIENTE →</button>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<div class="expediente-modal-overlay" id="plazaModal">
-  <div class="expediente-modal-box">
-    <button class="modal-close-btn" id="closeModal">×</button>
-    
-    <div class="modal-doc-header">
-      <span class="modal-doc-id" id="modalDocId">EXPEDIENTE Nº 00</span>
-      <h2 class="modal-doc-title" id="modalTitle">PLAZA DE MERCADO</h2>
-      <div class="modal-doc-city" id="modalCity">UBICACIÓN</div>
-    </div>
-
-    <div class="modal-doc-body">
-      <div class="modal-top-row">
-        <div class="modal-video-container">
-          <div class="video-iframe-holder" id="modalVideoHolder">
-            <span class="text-bone">CARGANDO REPRODUCTOR...</span>
-          </div>
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="index.html" class="menu-link">ARCHIVO</a>
+          <p class="menu-desc">La memoria visual y el bullicio de nuestros mercados, guardados pa' que no se pierdan.</p>
         </div>
-        <div class="modal-fast-facts bg-carbon text-bone">
-          <h4 class="accent-yellow">FICHA TÉCNICA</h4>
-          <ul class="facts-list" id="modalFactsList">
-            </ul>
+        <div class="hover-tiles">
+          <img src="imagenes/NIña (Grande).JPG" class="tile tile-1" alt="Archivo visual">
+          <img src="imagenes/Carga 1 (Grande).JPG" class="tile tile-2" alt="Documentación">
+          <img src="imagenes/Hojas (Grande).JPG" class="tile tile-3" alt="Saberes">
         </div>
-      </div>
-
-
-      <div class="modal-report-section text-carbon">
-
-       <div class="modal-report-section text-carbon">
-
-        <h3>INFORME DE INMERSIÓN</h3>
-        <p id="modalLongDesc">Crónica de la plaza...</p>
-      </div>
-
-      <div class="modal-gallery-section text-carbon">
-        <h3>EVIDENCIA FOTOGRÁFICA</h3>
-        <div class="modal-images-grid" id="modalGalleryGrid">
-          </div>
-      </div>
-    </div>
-
-    <div class="modal-doc-footer">
-      <div class="stamp-verified">ARCHIVO PREGÓN</div>
-      <a href="#" target="_blank" class="btn-external-plaza" id="modalExternalLink">VISITAR WEB DE LA PLAZA ↗️</a>
-    </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="plazas.html" class="menu-link">PLAZAS</a>
+          <p class="menu-desc">Paseate por las galerías y mercados que le dan de comer a todo el Eje Cafetero.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/cajas moradas (Grande).JPG" class="tile tile-1" alt="Plaza 1">
+          <img src="imagenes/Carro (Grande).JPG" class="tile tile-2" alt="Plaza 2">
+          <img src="imagenes/Papa y canasta (Grande).JPG" class="tile tile-3" alt="Plaza 3">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="narrativas.html" class="menu-link">NARRATIVAS</a>
+          <p class="menu-desc">La película 'El Orden Invisible' y los audios de la gente que camella en los pasillos.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Carga 4 (Grande).JPG" class="tile tile-1" alt="Documental">
+          <img src="imagenes/Frijol manos (Grande).JPG" class="tile tile-2" alt="Podcast">
+          <img src="imagenes/Carga 2 (Grande).JPG" class="tile tile-3" alt="Cine">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="mapa.html" class="menu-link">MAPA</a>
+          <p class="menu-desc">Ubicá las 14 plazas que tenemos mapeadas y caé a visitarlas.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Mango1 (Grande).JPG" class="tile tile-1" alt="Cartografía">
+          <img src="imagenes/Tomate (Grande).JPG" class="tile tile-2" alt="Ubicación">
+          <img src="imagenes/Platanos 2 (Grande).JPG" class="tile tile-3" alt="Territorio">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="nosotros.html" class="menu-link">NOSOTROS</a>
+          <p class="menu-desc">Los tres pelados apasionados por recoger y contar la memoria de nuestra tierra.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="IMAGENES/Alex.JPG" class="tile tile-1" alt="Equipo 1">
+          <img src="IMAGENES/Wilmer.JPG" class="tile tile-2" alt="Equipo 2">
+          <img src="IMAGENES/Salome.JPG" class="tile tile-3" alt="Equipo 3">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="recuerdos.html" class="menu-link">RECUERDOS</a>
+          <p class="menu-desc">Llevate un fanzine o unas postales y ayudanos a seguir contando historias.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Banano (Grande).JPG" class="tile tile-1" alt="Fanzine">
+          <img src="imagenes/Canasta 1 (Grande).JPG" class="tile tile-2" alt="Postales">
+          <img src="imagenes/Canas 2 (Grande).JPG" class="tile tile-3" alt="Impresos">
+        </div>
+      </li>
+    </ul>
   </div>
 </div>
 
+<section class="plazas-hero-compact gsap-reveal">
+    <div class="tag-sticker bg-yellow text-carbon">DIRECTORIO REGIONAL</div>
+    <h1 class="plazas-page-title">LAS GALERÍAS</h1>
+    <p class="plazas-page-intro">Cuatro paradas obligatorias del voleo y la abundancia en el Eje Cafetero. Dale clic a cualquier plaza para abrir su expediente histórico.</p>
+</section>
+
+<section class="plazas-grid-section gsap-reveal">
+    <div class="plazas-directorio-grid">
+        
+        <div class="plaza-card-brutal item-plaza-popup" 
+             data-name="Minorista Impala" 
+             data-city="Pereira" 
+             data-img="imagenes/Papa y canasta.JPG" 
+             data-link="link-a-tu-pagina-de-impala.html"
+             data-desc="El epicentro del trato cercano y la resistencia campesina en el centro de Pereira. Famosa por sus puestos de hierbas medicinales, la amabilidad de caseros tradicionales como Doña Luz y la infaltable ñapa dominical.">
+            <div class="plaza-card-img-wrap">
+                <img src="imagenes/Papa y canasta.JPG" alt="Minorista Impala" class="plaza-card-img">
+                <div class="plaza-card-overlay">
+                    <div class="plaza-card-meta">
+                        <span class="plaza-meta-city">PEREIRA</span>
+                        <h2 class="plaza-meta-title">MINORISTA IMPALA</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plaza-card-brutal item-plaza-popup" 
+             data-name="Mayorista Mercasa" 
+             data-city="Pereira" 
+             data-img="imagenes/fotos editadas/mercasa.jpg" 
+             data-link="link-a-tu-pagina-de-mercasa.html"
+             data-desc="El gigante logístico de la madrugada. Aquí camiones cargados de alimentos de todo el país descargan toneladas de comida desde las 2:00 AM. El rugido de motores y la fuerza de los coteros le dan vida a la despensa más grande de Risaralda.">
+            <div class="plaza-card-img-wrap">
+                <img src="imagenes/fotos editadas/mercasa.jpg" alt="Mayorista Mercasa" class="plaza-card-img">
+                <div class="plaza-card-overlay">
+                    <div class="plaza-card-meta">
+                        <span class="plaza-meta-city">PEREIRA</span>
+                        <h2 class="plaza-meta-title">MAYORISTA MERCASA</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plaza-card-brutal item-plaza-popup" 
+             data-name="Galería Santa Rosa" 
+             data-city="Santa Rosa de Cabal" 
+             data-img="imagenes/fotos editadas/santarosa.jpeg" 
+             data-link="link-a-tu-pagina-de-santarosa.html"
+             data-desc="Tradición andina y sabor criollo. Un mercado impregnado con el aroma de los embutidos artesanales más famosos de la región y cargado de productos frescos traídos directamente de las veredas altas de la serranía.">
+            <div class="plaza-card-img-wrap">
+                <img src="imagenes/fotos editadas/santarosa.jpeg" alt="Galería Santa Rosa" class="plaza-card-img">
+                <div class="plaza-card-overlay">
+                    <div class="plaza-card-meta">
+                        <span class="plaza-meta-city">SANTA ROSA</span>
+                        <h2 class="plaza-meta-title">GALERÍA SANTA ROSA</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plaza-card-brutal item-plaza-popup" 
+             data-name="Plaza de Cartago" 
+             data-city="Cartago" 
+             data-img="imagenes/Tomate.JPG" 
+             data-link="link-a-tu-pagina-de-cartago.html"
+             data-desc="El corazón comercial del Norte del Valle. Una arquitectura icónica que resguarda saberes de antaño, donde el chontaduro, el plátano y el intercambio cultural de la región pacífica se funden en sus pasillos tradicionales.">
+            <div class="plaza-card-img-wrap">
+                <img src="imagenes/Tomate.JPG" alt="Plaza de Cartago" class="plaza-card-img">
+                <div class="plaza-card-overlay">
+                    <div class="plaza-card-meta">
+                        <span class="plaza-meta-city">CARTAGO</span>
+                        <h2 class="plaza-meta-title">PLAZA DE CARTAGO</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="calc-mercado-section gsap-reveal">
+    <div class="calc-container-layout">
+        
+        <div class="calc-controls-box">
+            <div class="tag-sticker bg-red text-bone">LA CUENTA CLARA</div>
+            <h2 class="calc-box-title">¿Cuánto cuesta<br>mercar en la plaza?</h2>
+            <p class="calc-box-desc">Haz el cálculo aproximado de tu canasta familiar con los precios reales de los pasillos de abastos.</p>
+            
+            <div class="calc-inputs-row">
+                <div class="calc-form-group">
+                    <label class="calc-label" for="calcProducto">1. EL PRODUCTO:</label>
+                    <select id="calcProducto" class="calc-select-brutal">
+                        <option value="2500" data-name="Papa Capira">🥔 Papa Capira ($2.500/Kg)</option>
+                        <option value="2800" data-name="Yuca">🍠 Yuca ($2.800/Kg)</option>
+                        <option value="2000" data-name="Zanahoria">🥕 Zanahoria ($2.000/Kg)</option>
+                        <option value="3200" data-name="Plátano Hartón">🍌 Plátano Hartón ($3.200/Kg)</option>
+                        <option value="3800" data-name="Tomate Chonto">🍅 Tomate Chonto ($3.800/Kg)</option>
+                        <option value="3500" data-name="Cebolla Cabezona">🧅 Cebolla Cab. ($3.500/Kg)</option>
+                        <option value="3000" data-name="Cebolla Larga">🥬 Cebolla Larga ($3.000/Atado)</option>
+                        <option value="2000" data-name="Cilantro">🌿 Cilantro ($2.000/Atado)</option>
+                        <option value="5500" data-name="Fríjol Verde">🫘 Fríjol Verde ($5.500/Kg)</option>
+                        <option value="7000" data-name="Arveja Verde">🟢 Arveja Verde ($7.000/Kg)</option>
+                        <option value="2000" data-name="Banano Criollo">🍌 Banano Criollo ($2.000/Kg)</option>
+                        <option value="4500" data-name="Mango Tommy">🥭 Mango Tommy ($4.500/Kg)</option>
+                        <option value="6000" data-name="Aguacate Papelillo">🥑 Aguacate Pap. ($6.000/Kg)</option>
+                        <option value="4500" data-name="Lulo">🟠 Lulo ($4.500/Kg)</option>
+                        <option value="4000" data-name="Mora">🫐 Mora ($4.000/Kg)</option>
+                        <option value="3500" data-name="Limón Tahití">🍋 Limón Tahití ($3.500/Kg)</option>
+                        <option value="3000" data-name="Guayaba Dulce">🍐 Guayaba Dulce ($3.000/Kg)</option>
+                        <option value="4000" data-name="Maracuyá">🟡 Maracuyá ($4.000/Kg)</option>
+                    </select>
+                </div>
+                
+                <div class="calc-form-group">
+                    <label class="calc-label" for="calcKilos">2. KILOS:</label>
+                    <input type="number" id="calcKilos" class="calc-input-brutal" value="1" min="1" max="99">
+                </div>
+            </div>
+            
+            <button class="btn-submit-foto-muro" id="btnAgregarFactura" style="margin-top: 10px;">
+                🧺 AGREGAR AL CANASTO
+            </button>
+        </div>
+        
+        <div class="calc-factura-ticket">
+            <div class="ticket-header">
+                <span class="ticket-brand">*** EL PREGÓN DE LA PLAZA ***</span>
+                <span class="ticket-date">REGISTRO DE CONTROL DE ABASTOS</span>
+                <div class="ticket-divider-dashed"></div>
+            </div>
+            
+            <div class="ticket-items-body" id="ticketItemsContainer">
+                <div class="ticket-empty-text" id="ticketVacioMsg">Tu canasto está vacío, vecino...</div>
+            </div>
+            
+            <div class="ticket-footer-summary">
+                <div class="ticket-divider-dashed"></div>
+                <div class="ticket-total-row">
+                    <span class="total-label">TOTAL ESTIMADO:</span>
+                    <span class="total-amount" id="ticketTotalAcumulado">$0</span>
+                </div>
+                <div class="ticket-divider-dashed" style="margin-top: 10px;"></div>
+                <div class="ticket-napa-stamp" id="napaStamp" style="display: none;">¡Y va con ñapa incluida! ✦</div>
+                <button class="btn-clear-ticket" id="btnLimpiarTicket">BORRAR CUENTA</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div class="upload-modal-overlay" id="plazaModal">
+  <div class="upload-modal-box bg-bone border-carbon" style="max-width: 550px;">
+    <button class="btn-close-upload" id="btnCerrarPlazaModal">×</button>
+    <div class="popup-plaza-img-frame" style="border: 3px solid var(--carbon); height: 250px; overflow: hidden; background: #000;">
+        <img src="" id="plazaPopupImg" alt="Plaza" style="width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    <span class="tag-sticker bg-red text-bone" id="plazaPopupCity" style="margin-top: 20px; margin-bottom: 10px;">CIUDAD</span>
+    <h2 class="upload-modal-title" id="plazaPopupTitle" style="margin-bottom: 15px;">NOMBRE PLAZA</h2>
+    <p class="upload-modal-subtitle" id="plazaPopupDesc" style="color: var(--carbon-light); font-size: 15px; line-height: 1.6; margin-bottom: 25px;">Descripción de la plaza.</p>
+    
+    <a href="#" id="plazaPopupLink" class="btn-submit-foto-muro text-center" style="display: block; text-decoration: none;">
+        📖 VER EXPEDIENTE COMPLETO
+    </a>
+  </div>
+</div>
+
+<footer class="footer-terminal">
+  <div class="footer-grid">
+    
+    <!-- Cuadrante 1: Branding y Sello -->
+    <div class="footer-cell brand-cell">
+      <h2 class="terminal-title">PREGÓN<br>DE LA<br>PLAZA</h2>
+      <div class="terminal-badge">ARCHIVO TRANSMEDIA</div>
+    </div>
+    
+    <div class="footer-cell nav-cell">
+      <span class="cell-label">/// SEGUÍ EL PREGÓN</span>
+      <ul class="terminal-links">
+        <li><a href="#" target="_blank">INSTAGRAM</a></li>
+        <li><a href="#" target="_blank">TIKTOK</a></li>
+        <li><a href="mailto:hola@pregon.com">CONTACTO</a></li>
+      </ul>
+    </div>
+    
+    <!-- Cuadrante 3: Info y Firma -->
+    <div class="footer-cell info-cell">
+      <span class="cell-label">/// EL MANIFIESTO</span>
+      <p class="creator-text">
+        La galería no es un tiradero de comida, es el latido vivo del Eje Cafetero. Un proyecto de diseño, memoria y mucho corazón.
+      </p>
+      <!-- El guiño a los creadores -->
+      <div class="rakun-stamp">Cosechado por Rakün Design</div>
+    </div>
+    
+  </div>
+
+  <!-- Barra inferior de cierre -->
+  <div class="footer-bottom-bar">
+    <span>© 2026 PREGÓN DE LA PLAZA — RESERVADOS TODOS LOS DERECHOS</span>
+    <button class="btn-top-terminal" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      VOLVER ARRIBA ↑
+    </button>
+  </div>
+</footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>

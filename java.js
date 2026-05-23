@@ -641,3 +641,104 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // ==========================================================================
+    // 14. LÓGICA POPUPS PLAZAS (EXPEDIENTES)
+    // ==========================================================================
+    const tarjetasPlaza = document.querySelectorAll('.item-plaza-popup');
+    const plazaModal = document.getElementById('plazaModal');
+    const btnCerrarPlaza = document.getElementById('btnCerrarPlazaModal');
+
+    if (tarjetasPlaza.length > 0 && plazaModal && btnCerrarPlaza) {
+        tarjetasPlaza.forEach(tarjeta => {
+            tarjeta.addEventListener('click', () => {
+                const name = tarjeta.getAttribute('data-name');
+                const city = tarjeta.getAttribute('data-city');
+                const img = tarjeta.getAttribute('data-img');
+                const link = tarjeta.getAttribute('data-link');
+                const desc = tarjeta.getAttribute('data-desc');
+
+                document.getElementById('plazaPopupImg').setAttribute('src', img);
+                document.getElementById('plazaPopupTitle').innerText = name.toUpperCase();
+                document.getElementById('plazaPopupCity').innerText = city.toUpperCase();
+                document.getElementById('plazaPopupDesc').innerText = desc;
+                document.getElementById('plazaPopupLink').setAttribute('href', link);
+
+                plazaModal.classList.add('is-open');
+            });
+        });
+
+        btnCerrarPlaza.addEventListener('click', () => {
+            plazaModal.classList.remove('is-open');
+        });
+    }
+
+    // ==========================================================================
+    // 15. CALCULADORA DE MERCADO (FACTURA INTERACTIVA)
+    // ==========================================================================
+    const btnAgregarFactura = document.getElementById('btnAgregarFactura');
+    const btnLimpiarTicket = document.getElementById('btnLimpiarTicket');
+    const ticketItemsContainer = document.getElementById('ticketItemsContainer');
+    const ticketTotalAcumulado = document.getElementById('ticketTotalAcumulado');
+    const ticketVacioMsg = document.getElementById('ticketVacioMsg');
+    const napaStamp = document.getElementById('napaStamp');
+
+    // Usamos window.totalCuenta para evitar conflictos de variables globales si recargas
+    window.totalCuenta = window.totalCuenta || 0;
+
+    if (btnAgregarFactura && ticketItemsContainer) {
+        btnAgregarFactura.addEventListener('click', () => {
+            const selectProd = document.getElementById('calcProducto');
+            const inputKilos = document.getElementById('calcKilos');
+            
+            const precioPorKilo = parseInt(selectProd.value);
+            const kilos = parseFloat(inputKilos.value) || 1;
+            
+            const selectedOption = selectProd.options[selectProd.selectedIndex];
+            const nombreProducto = selectedOption.getAttribute('data-name');
+            const costoFila = precioPorKilo * kilos;
+            
+            if (ticketVacioMsg) ticketVacioMsg.style.display = 'none';
+
+            const nuevaFila = document.createElement('div');
+            nuevaFila.className = 'ticket-row';
+            
+            const subtotalFormateado = new Intl.NumberFormat('es-CO', {
+                style: 'currency', currency: 'COP', minimumFractionDigits: 0
+            }).format(costoFila);
+
+            nuevaFila.innerHTML = `
+                <span class="ticket-row-name">${nombreProducto} (${kilos})</span>
+                <span class="ticket-row-price">${subtotalFormateado}</span>
+            `;
+
+            ticketItemsContainer.appendChild(nuevaFila);
+            window.totalCuenta += costoFila;
+            
+            ticketTotalAcumulado.innerText = new Intl.NumberFormat('es-CO', {
+                style: 'currency', currency: 'COP', minimumFractionDigits: 0
+            }).format(window.totalCuenta);
+
+            if (window.totalCuenta >= 20000 && napaStamp) napaStamp.style.display = 'block';
+
+            if (typeof gsap !== 'undefined') {
+                gsap.fromTo('.calc-factura-ticket', 
+                    { backgroundColor: 'var(--yellow)' }, 
+                    { backgroundColor: '#fffdeb', duration: 0.4 }
+                );
+            }
+        });
+
+        if (btnLimpiarTicket) {
+            btnLimpiarTicket.addEventListener('click', () => {
+                ticketItemsContainer.innerHTML = '';
+                if (ticketVacioMsg) {
+                    ticketItemsContainer.appendChild(ticketVacioMsg);
+                    ticketVacioMsg.style.display = 'block';
+                }
+                if (napaStamp) napaStamp.style.display = 'none';
+                window.totalCuenta = 0;
+                ticketTotalAcumulado.innerText = '$0';
+            });
+        }
+    }
