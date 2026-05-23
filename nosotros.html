@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros | Pregón de la Plaza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,600;1,9..40,300&family=Fredoka:wght@400;500;600;700&family=Yellowtail&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nosotros.css">
+</head>
+<body>
+
+<header class="nav-brutal">
+  <a href="index.html" class="nav-logo-link">
+    <img src="imagenes/logo-(Grande).png" alt="Logo Pregón de la Plaza" class="nav-logo">
+  </a>
+
+  <div class="nav-actions">
+    <a href="galeria.html" class="btn-muro-nav" aria-label="Ir al muro colectivo">
+      <img src="imagenes/canasta-icono.png" alt="Canasta" class="icono-canasta">
+    </a>
+
+    <button class="fruit-trigger" id="menuTrigger" aria-label="Abrir menú">
+      <svg viewBox="0 0 100 100" width="65" height="65" xmlns="http://www.w3.org/2000/svg" class="fruit-icon">
+        <polygon points="30,90 12,65 15,30 40,15 75,20 90,45 80,80 55,95" fill="#de0636" />
+        <polygon points="45,15 52,28 75,22 60,38 72,55 52,48 48,65 40,48 20,50 35,38 22,22 40,28" fill="#118a5f" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div class="menu-overlay" id="menuOverlay">
+  <div class="menu-content">
+    <ul class="menu-links">
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="index.html" class="menu-link">ARCHIVO</a>
+          <p class="menu-desc">La memoria visual y el bullicio de nuestros mercados, guardados pa' que no se pierdan.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Carga 1 (Grande).JPG" class="tile tile-1" alt="Archivo visual">
+          <img src="imagenes/Carga 1 (Grande).JPG" class="tile tile-2" alt="Documentación">
+          <img src="imagenes/Hojas (Grande).JPG" class="tile tile-3" alt="Saberes">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="plazas.html" class="menu-link">PLAZAS</a>
+          <p class="menu-desc">Paseate por las galerías y mercados que le dan de comer a todo el Eje Cafetero.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/cajas moradas (Grande).JPG" class="tile tile-1" alt="Plaza 1">
+          <img src="imagenes/Carro (Grande).JPG" class="tile tile-2" alt="Plaza 2">
+          <img src="imagenes/Papa y canasta (Grande).JPG" class="tile tile-3" alt="Plaza 3">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="narrativas.html" class="menu-link">NARRATIVAS</a>
+          <p class="menu-desc">La película 'El Orden Invisible' y los audios de la gente que camella en los pasillos.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Carga 4 (Grande).JPG" class="tile tile-1" alt="Documental">
+          <img src="imagenes/Frijol manos (Grande).JPG" class="tile tile-2" alt="Podcast">
+          <img src="imagenes/Carga 2 (Grande).JPG" class="tile tile-3" alt="Cine">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="mapa.html" class="menu-link">MAPA</a>
+          <p class="menu-desc">Ubicá las 14 plazas que tenemos mapeadas y caé a visitarlas.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Mango1 (Grande).JPG" class="tile tile-1" alt="Cartografía">
+          <img src="imagenes/Tomate (Grande).JPG" class="tile tile-2" alt="Ubicación">
+          <img src="imagenes/Platanos 2 (Grande).JPG" class="tile tile-3" alt="Territorio">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="nosotros.html" class="menu-link">NOSOTROS</a>
+          <p class="menu-desc">El equipo que investiga, observa y estructura la memoria digital de las plazas.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Canasta 1 (Grande).JPG" class="tile tile-1" alt="Equipo 1">
+          <img src="imagenes/Frijol manos (Grande).JPG" class="tile tile-2" alt="Equipo 2">
+          <img src="imagenes/Carro (Grande).JPG" class="tile tile-3" alt="Equipo 3">
+        </div>
+      </li>
+      <li class="menu-item">
+        <div class="menu-item-content">
+          <a href="recuerdos.html" class="menu-link">RECUERDOS</a>
+          <p class="menu-desc">Llevate un fanzine o unas postales y ayudanos a seguir contando historias.</p>
+        </div>
+        <div class="hover-tiles">
+          <img src="imagenes/Banano (Grande).JPG" class="tile tile-1" alt="Fanzine">
+          <img src="imagenes/Canasta 1 (Grande).JPG" class="tile tile-2" alt="Postales">
+          <img src="imagenes/Canas 2 (Grande).JPG" class="tile tile-3" alt="Impresos">
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+  <!-- HERO CINEMATICO NOSOTROS INICIO -->
+  <section class="nosotros-cinematic-hero" aria-labelledby="nosotrosHeroTitle">
+    <div class="cinematic-slider" aria-hidden="true">
+      <div class="cinematic-slide slide-a"></div>
+      <div class="cinematic-slide slide-b"></div>
+      <div class="cinematic-slide slide-c"></div>
+      <div class="cinematic-slide slide-d"></div>
+    </div>
+    <div class="cinematic-overlay" aria-hidden="true"></div>
+    <div class="cinematic-grid" aria-hidden="true"></div>
+
+    <div class="cinematic-content">
+      <span class="cinematic-kicker">CARTOGRAFIA VIVA </span>
+      <h1 class="cinematic-title" id="nosotrosHeroTitle">DETRAS DEL <span>pregón</span></h1>
+      <p class="cinematic-subtitle">No somos solo un equipo de diseño, somo recolectores bde memoria.  Nuestra mision es tomar el crito de la plaza  y convertirlo en un legado digital. </p>
+      <a href="#equipo" class="cinematic-cta">Conocer al equipo</a>
+    </div>
+  </section>
+  
+
+
+  <section class="nosotros-manifiesto gsap-reveal">
+    <div class="manifiesto-depth" aria-hidden="true">
+      <span class="manifiesto-bg-word">TRANSFORMAR</span>
+    </div>
+
+    <div class="manifiesto-frame">
+      <div class="manifiesto-copy" aria-label="Cada detalle nace de una visión que transforma ideas en experiencias con identidad.">
+        <h2 class="manifiesto-line line-one">Cada detalle nace de una visión que transforma</h2>
+        <p class="manifiesto-line line-two"><span class="word-script">ideas en experiencias con identidad.</span></p>
+        
+      </div>
+    </div>
+  </section>
+
+  <section class="equipo-section gsap-reveal" id="equipo">
+    <div class="equipo-heading">
+      <span class="section-kicker">INVESTIGADORES</span>
+      <h2>El equipo detrás de la propuesta digital.</h2>
+    </div>
+
+    <div class="equipo-grid">
+      <article class="equipo-card bg-bone text-carbon">
+        <img src="imagenes/Carga 1 (Grande).JPG" alt="Registro visual de la plaza">
+        <div class="equipo-card-body">
+          <span>INVESTIGADOR 01</span>
+          <h3>Alex</h3>
+          <p>Desarrollo y estructuración de la propuesta digital, colaborando en la organización visual, el análisis de la información recopilada y el fortalecimiento de la idea principal del proyecto.</p>
+        </div>
+      </article>
+
+      <article class="equipo-card bg-yellow text-carbon">
+        <img src="imagenes/Carga 2 (Grande).JPG" alt="Carga de productos en la plaza">
+        <div class="equipo-card-body">
+          <span>INVESTIGADOR 02</span>
+          <h3>Wilmer</h3>
+          <p>Investigación y análisis de las plazas seleccionadas para el proyecto, aportando información importante sobre sus características, funcionamiento y relación con la comunidad. Además, colaboró en la organización de ideas para el desarrollo de la página web.</p>
+        </div>
+      </article>
+
+      <article class="equipo-card bg-red text-bone">
+        <img src="imagenes/Canasta 1 (Grande).JPG" alt="Canasta con productos de mercado">
+        <div class="equipo-card-body">
+          <span>INVESTIGADOR 03</span>
+          <h3>Salomé</h3>
+          <p>Investigación del proyecto mediante la búsqueda y selección de información relevante sobre las plazas, ayudando a establecer conclusiones y propuestas para la creación de la página web.</p>
+        </div>
+      </article>
+
+      <article class="equipo-card bg-green text-bone">
+        <img src="imagenes/liseth.JPG" alt="Retrato de Liseth">
+        <div class="equipo-card-body">
+          <span>INVESTIGADOR 04</span>
+          <h3>Liseth</h3>
+          <p>Contribuyó en el proceso de recopilación de información y observación de las plazas, apoyando la construcción del contenido y la interpretación de los datos obtenidos durante la investigación.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="nosotros-cierre gsap-reveal">
+    <span class="tag-sticker bg-green text-bone">CARTOGRAFÍA VIVA</span>
+    <h2>SE LA VOZ DE LO<br><span class="accent-script accent-red">cotidiano</span></h2>
+    <p>Cada relato ayuda a ampliar este mapa de memorias. Si tienes una historia, una fotografía o un recuerdo de la plaza, súmate a esta construcción colectiva y deja que tu experiencia también alimente el archivo.</p>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="java.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+// Partículas ligeras
+function createParticles() {
+  const container = document.querySelector('.hero-premium-particles');
+  if (!container) return;
+  for (let i = 0; i < 24; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.top = Math.random() * 100 + 'vh';
+    p.style.width = p.style.height = (Math.random() * 8 + 4) + 'px';
+    p.style.opacity = Math.random() * 0.3 + 0.15;
+    p.style.background = 'linear-gradient(120deg, #f7c33288, #118a5f88)';
+    p.style.borderRadius = '50%';
+    p.style.position = 'absolute';
+    p.style.zIndex = 2;
+    container.appendChild(p);
+    animateParticle(p);
+  }
+}
+function animateParticle(p) {
+  const duration = Math.random() * 8 + 6;
+  const deltaY = Math.random() * 40 + 20;
+  gsap.to(p, {
+    y: `-=${deltaY}`,
+    x: `+=${Math.random() * 40 - 20}`,
+    repeat: -1,
+    yoyo: true,
+    duration: duration,
+    ease: 'sine.inOut'
+  });
+}
+createParticles();
+
+gsap.from('.hero-premium-glass', {opacity:0, y:60, duration:1.2, ease:'power3.out'});
+gsap.from('.collage-img', {
+  opacity:0, scale:0.92, y:40, stagger:0.18, duration:1.2, ease:'power2.out'
+});
+gsap.from('.mini-card', {opacity:0, y:30, stagger:0.2, duration:1, delay:0.7, ease:'power2.out'});
+
+
+const heroPremium = document.querySelector('.hero-premium');
+if (heroPremium) {
+heroPremium.addEventListener('mousemove', function(e){
+  const {width, height, left, top} = this.getBoundingClientRect();
+  const x = (e.clientX - left) / width - 0.5;
+  const y = (e.clientY - top) / height - 0.5;
+  document.querySelectorAll('.collage-img').forEach((img, i) => {
+    gsap.to(img, {
+      x: x * (30 + i*10),
+      y: y * (30 + i*10),
+      duration: 1.2,
+      ease: 'power3.out'
+    });
+  });
+});
+}
+
+// Responsive: reset parallax on mobile
+window.addEventListener('resize', () => {
+  if(window.innerWidth < 700){
+    document.querySelectorAll('.collage-img').forEach(img => {
+      gsap.to(img, {x:0, y:0, duration:0.6, ease:'power2.inOut'});
+    });
+  }
+});
+
+const cinematicHero = document.querySelector('.nosotros-cinematic-hero');
+const cinematicSlider = document.querySelector('.cinematic-slider');
+const cinematicAllowsMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (cinematicHero && cinematicSlider && cinematicAllowsMotion) {
+  cinematicHero.addEventListener('pointermove', (event) => {
+    const rect = cinematicHero.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width - 0.5) * 18;
+    const y = ((event.clientY - rect.top) / rect.height - 0.5) * 18;
+    cinematicSlider.style.transform = `translate3d(${x}px, ${y}px, 0) scale(1.035)`;
+  });
+
+  cinematicHero.addEventListener('pointerleave', () => {
+    cinematicSlider.style.transform = 'translate3d(0, 0, 0) scale(1.035)';
+  });
+}
+
+const manifiestoSection = document.querySelector('.nosotros-manifiesto');
+
+if (manifiestoSection) {
+  const manifiestoObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        manifiestoObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.34 });
+
+  manifiestoObserver.observe(manifiestoSection);
+
+  if (cinematicAllowsMotion) {
+    const bgWord = manifiestoSection.querySelector('.manifiesto-bg-word');
+
+    manifiestoSection.addEventListener('pointermove', (event) => {
+      const rect = manifiestoSection.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+      if (bgWord) {
+        bgWord.style.transform = `translate3d(${x * -24}px, ${y * -10}px, 0)`;
+      }
+    });
+
+    manifiestoSection.addEventListener('pointerleave', () => {
+      if (bgWord) {
+        bgWord.style.transform = 'translate3d(0, 0, 0)';
+      }
+    });
+  }
+}
+</script>
+</body>
+</html>
