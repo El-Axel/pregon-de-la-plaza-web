@@ -22,7 +22,7 @@
 
 @font-face {
   font-family: 'Pangram Sans';
-  src: url('fonts/PangramSans.ttf') format('truetype');
+  src: url('font/PangramSans.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -30,7 +30,7 @@
 
 @font-face {
   font-family: 'GreatlyDEMO';
-  src: url('fonts/GreatlyDEMO.ttf') format('truetype');
+  src: url('font/GreatlyDEMO.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -842,7 +842,7 @@ p, h1, h2, h3, .texto-informativo {
    TARJETA ROJA (ÚNETE)
    ================== */
 .unete-tag {
-  font-family: var(--font-body); 
+  font-family: var(--font); 
   font-size: 45px; 
   line-height: 0.9;
   color: var(--carbon); 
@@ -1135,7 +1135,7 @@ p, h1, h2, h3, .texto-informativo {
    ============================================ */
 
 .productos-editorial {
-  padding: 120px 40px 0;
+  padding: 80px 40px 0;
   background: var(--bone); 
   border-bottom: 2px solid var(--carbon);
 }
@@ -1197,7 +1197,7 @@ p, h1, h2, h3, .texto-informativo {
 .vertical-text {
   position: absolute;
   font-family: var(--font-disp);
-  font-size: 8vw; 
+  font-size: 10vw; 
   color: rgba(var(--rgb-carbon), 0.15);
   transform: rotate(-90deg);
   white-space: nowrap;
