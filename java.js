@@ -295,8 +295,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 lat: 4.8105,
                 lon: -75.6980, 
                 desc: "El trato bacano, el fiado y el mercado tradicional en pleno centro de la ciudad.",
-                img: "IMAGENES/Papa y canasta.JPG",
-                link: "plazas.html" // Esto los llevará al directorio que hicimos
+                img: "imagenes/fotos editadas/impala.jpeg",
+                link: "plazas.html"
             },
             {
                 nombre: "Mercasa Mayorista",
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 lat: 4.7950,
                 lon: -75.7200,
                 desc: "El gigante de la madrugada. Donde se mueven las toneladas que alimentan la región.",
-                img: "IMAGENES/cajas moradas.JPG",
+                img: "imagenes/fotos editadas/mercasa.jpg",
                 link: "plazas.html"
             },
             {
@@ -313,27 +313,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 lat: 4.8667,
                 lon: -75.6167,
                 desc: "Sabor a campo, embutidos y la tradición campesina intacta.",
-                img: "IMAGENES/Hojas.JPG",
+                img: "imagenes/fotos editadas/santarosa.jpeg",
                 link: "plazas.html"
             },
             {
-                nombre: "Plaza de Mercado Cartago",
+                nombre: "Plaza de Cartago",
                 ciudad: "CARTAGO",
                 lat: 4.7469,
                 lon: -75.9119,
                 desc: "Corazón comercial e histórico del norte del Valle. Un espacio de tradición y resistencia campesina.",
-                img: "IMAGENES/Tomate.JPG", // Pon la aquí la foto de Cartago cuando la tengas
+                img: "imagenes/fotos editadas/cartago.jpeg",
                 link: "plazas.html"
             }
-            
-    
         ];
 
-        // 5. Pintar los marcadores en el mapa
+        // 5. Pintar los marcadores en el mapa con NOMBRES DINÁMICOS
         plazasDB.forEach(plaza => {
-            const marker = L.marker([plaza.lat, plaza.lon], { icon: plazaIcon }).addTo(mapa);
+            // Creamos un icono único para cada plaza que incluye su nombre en HTML
+            const iconoDinamico = L.divIcon({
+                className: 'custom-map-marker',
+                html: `
+                    <div style="position: relative; display: flex; flex-direction: column; align-items: center;">
+                        <div style="background-color: var(--red); width: 24px; height: 24px; border-radius: 50%; border: 3px solid var(--bone); box-shadow: 4px 4px 0px var(--carbon);"></div>
+                        <div class="pin-nombre-plaza">${plaza.nombre}</div>
+                    </div>
+                `,
+                iconSize: [24, 24],
+                iconAnchor: [12, 12],   
+                popupAnchor: [0, -10]   
+            });
 
-            // Plantilla HTML del Popup (Con nuestras clases CSS)
+            const marker = L.marker([plaza.lat, plaza.lon], { icon: iconoDinamico }).addTo(mapa);
+
             const popupHTML = `
                 <div class="popup-brutal">
                     <img src="${plaza.img}" alt="${plaza.nombre}" class="popup-img">
@@ -346,7 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
-            // Vincular el popup al marcador
             marker.bindPopup(popupHTML);
         });
     }

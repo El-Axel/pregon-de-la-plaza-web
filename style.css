@@ -1517,6 +1517,22 @@ p, h1, h2, h3, .texto-informativo {
   will-change: transform; /* Preparado para el Parallax JS */
 }
 
+/* Etiqueta con el nombre de la plaza debajo del pin */
+.pin-nombre-plaza {
+    font-family: var(--font-disp);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--carbon);
+    background: var(--bone);
+    border: 2px solid var(--carbon);
+    padding: 3px 6px;
+    margin-top: 8px; /* Separa el texto del punto rojo */
+    white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+    box-shadow: 3px 3px 0px var(--carbon);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
 /* La línea punteada animada */
 .map-route-line {
   position: absolute;
@@ -2313,24 +2329,28 @@ p, h1, h2, h3, .texto-informativo {
   line-height: 1.4;
 }
 
-.btn-popup {
-  display: block;
-  font-family: var(--font-disp);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--bone);
-  background: var(--carbon);
-  padding: 12px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-  text-align: center;
-  border: 2px solid var(--carbon);
+.leaflet-container a.btn-popup {
+  display: block !important;
+  font-family: var(--font-disp) !important;
+  font-size: 14px !important;
+  font-weight: bold !important;
+  color: var(--bone) !important;
+  background-color: var(--green) !important;
+  border: 3px solid var(--carbon) !important;
+  box-shadow: 4px 4px 0px var(--carbon) !important;
+  padding: 12px !important;
+  text-decoration: none !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1) !important;
+  margin-top: 15px !important;
 }
 
-.btn-popup:hover {
-  background: var(--green);
-  border-color: var(--green);
+.leaflet-container a.btn-popup:hover {
+  background-color: var(--yellow) !important;
+  color: var(--carbon) !important;
+  transform: translate(-2px, -2px) !important;
+  box-shadow: 6px 6px 0px var(--carbon) !important;
 }
 
 /* El botón de la X (Cerrar) */
