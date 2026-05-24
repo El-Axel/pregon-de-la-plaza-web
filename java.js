@@ -764,8 +764,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let cart = [];
 
-    // Esta es la función que querías poner:
     function updateCart() {
+        if(!cartCount) return; // Validación de seguridad
         cartCount.innerText = cart.length;
         cartItemsList.innerHTML = ''; 
         let total = 0;
@@ -784,29 +784,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         cartTotal.innerText = `$${total.toLocaleString()}`;
-        // IMPORTANTE: Esto guarda el carrito para que no se borre al cambiar de página
         localStorage.setItem('cart', JSON.stringify(cart));
     }
 
-    // Esta función para agregar productos también va aquí afuera
     function addToCart(nombre, precio) {
         cart.push({ nombre, precio });
         updateCart();
-        if(typeof gsap !== 'undefined') gsap.fromTo(cartBtn, { scale: 1.2 }, { scale: 1, duration: 0.3 });
+        if(typeof gsap !== 'undefined' && cartBtn) gsap.fromTo(cartBtn, { scale: 1.2 }, { scale: 1, duration: 0.3 });
     }
 
-    // Eventos de apertura/cierre
     if(cartBtn) cartBtn.addEventListener('click', () => cartModal.classList.toggle('open'));
     const closeCart = document.getElementById('closeCart');
     if(closeCart) closeCart.addEventListener('click', () => cartModal.classList.remove('open'));
 
-// ¡OJO! Aquí debe ir la llave que cierra el DOMContentLoaded (la del principio de tu archivo)
+    // ============================================
+    // 18. REPRODUCTOR SENSORIAL (HOVER DE VIDEO Y AUDIO)
+    // ============================================
+    const cajaVideo = document.getElementById('cajaVideoPlaza');
+    const videoSensorial = document.getElementById('videoPlaza');
 
-// Mostrar productos
-    let html = '<ul class="checkout-resumen-list">';
-    cart.forEach(item => {
-        html += `<li class="checkout-resumen-item"><span>${item.nombre}</span> <b>$${item.precio.toLocaleString()}</b></li>`;
-    });
-    html += `</ul><div class="checkout-title" style="margin-top:20px; font-size: 24px;">TOTAL: $${total.toLocaleString()}</div>`;
-    
-    document.getElementById('resumenCheckout').innerHTML = html;
+    if (cajaVideo && videoSensorial) {
+        // Cuando el mouse ENTRA
+        cajaVideo.addEventListener('mouseenter', () => {
+            videoSensorial.muted = false; // Le devolvemos la voz a la plaza
+            videoSensorial.play();        // Arranca el video
+        });
+
+        // Cuando el mouse SALE
+        cajaVideo.addEventListener('mouseleave', () => {
+            videoSensorial.pause();       // Congelamos la imagen
+            videoSensorial.muted = true;  // Volvemos a silenciar por si acaso
+        });
+    }
+
+// ¡AQUÍ SE ACABA TU ARCHIVO JAVA.JS! NO PONGAS ABSOLUTAMENTE NADA MÁS ABAJO.

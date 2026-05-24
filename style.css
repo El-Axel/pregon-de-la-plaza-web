@@ -2656,7 +2656,7 @@ p, h1, h2, h3, .texto-informativo {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-top: 100px; /* Debajo de la nav */
+  padding-top: 10px; /* Debajo de la nav */
   position: relative;
   overflow: hidden;
 }
