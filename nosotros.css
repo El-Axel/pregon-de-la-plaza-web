@@ -44,22 +44,22 @@
 }
 
 .slide-a {
-  background-image: url('imagenes/Frijol manos (Grande).JPG');
+  background-image: url('imagenes/fotos\ editadas/carga1.jpg');
   animation-delay: 0s;
 }
 
 .slide-b {
-  background-image: url('imagenes/Canasta 1 (Grande).JPG');
+  background-image: url('imagenes/fotos\ editadas/niña.jpg');
   animation-delay: 7s;
 }
 
 .slide-c {
-  background-image: url('imagenes/Carga 2 (Grande).JPG');
+  background-image: url('imagenes/fotos\ editadas/tienda3.jpg');
   animation-delay: 14s;
 }
 
 .slide-d {
-  background-image: url('imagenes/Hojas (Grande).JPG');
+  background-image: url('imagenes/fotos\ editadas/platano2.jpg');
   animation-delay: 21s;
 }
 

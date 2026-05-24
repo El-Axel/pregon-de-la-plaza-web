@@ -742,3 +742,61 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // ==========================================================================
+    // 16. CARRITO MERCADO (EL MOTOR FINAL)
+    // ==========================================================================
+    const cartBtn = document.getElementById('cartBtn');
+    const cartModal = document.getElementById('cartModal');
+    const cartCount = document.getElementById('cartCount');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartTotal = document.getElementById('cartTotal');
+
+    let cart = [];
+
+    // Esta es la función que querías poner:
+    function updateCart() {
+        cartCount.innerText = cart.length;
+        cartItemsList.innerHTML = ''; 
+        let total = 0;
+        
+        if (cart.length === 0) {
+            cartItemsList.innerHTML = '<p style="font-family: var(--font-body);">El canasto está vacío.</p>';
+        } else {
+            cart.forEach((item, index) => {
+                total += item.precio;
+                cartItemsList.innerHTML += `
+                    <div class="cart-item">
+                        <span>${item.nombre}</span>
+                        <span>$${item.precio.toLocaleString()}</span>
+                    </div>`;
+            });
+        }
+        
+        cartTotal.innerText = `$${total.toLocaleString()}`;
+        // IMPORTANTE: Esto guarda el carrito para que no se borre al cambiar de página
+        localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    // Esta función para agregar productos también va aquí afuera
+    function addToCart(nombre, precio) {
+        cart.push({ nombre, precio });
+        updateCart();
+        if(typeof gsap !== 'undefined') gsap.fromTo(cartBtn, { scale: 1.2 }, { scale: 1, duration: 0.3 });
+    }
+
+    // Eventos de apertura/cierre
+    if(cartBtn) cartBtn.addEventListener('click', () => cartModal.classList.toggle('open'));
+    const closeCart = document.getElementById('closeCart');
+    if(closeCart) closeCart.addEventListener('click', () => cartModal.classList.remove('open'));
+
+// ¡OJO! Aquí debe ir la llave que cierra el DOMContentLoaded (la del principio de tu archivo)
+
+// Mostrar productos
+    let html = '<ul class="checkout-resumen-list">';
+    cart.forEach(item => {
+        html += `<li class="checkout-resumen-item"><span>${item.nombre}</span> <b>$${item.precio.toLocaleString()}</b></li>`;
+    });
+    html += `</ul><div class="checkout-title" style="margin-top:20px; font-size: 24px;">TOTAL: $${total.toLocaleString()}</div>`;
+    
+    document.getElementById('resumenCheckout').innerHTML = html;

@@ -125,7 +125,7 @@
                 <p class="producto-desc">32 páginas de pura gráfica popular, crónicas de la madrugada y fotografías exclusivas de Mercasa y La Minorista. Impreso en papel bond ecológico.</p>
                 <div class="producto-compra">
                     <span class="producto-precio">$25.000</span>
-                    <button class="btn-carbon-hover">AGREGAR 🛒</button>
+                    <button class="btn-carbon-hover" onclick="addToCart('Fanzine El Pregón', 25000)">AGREGAR 🛒</button>
                 </div>
             </div>
         </div>
@@ -140,7 +140,7 @@
                 <p class="producto-desc">Cinco fotografías icónicas del proyecto listas para enmarcar o enviar. Capturas de rostros, abundancia y texturas del mercado.</p>
                 <div class="producto-compra">
                     <span class="producto-precio">$15.000</span>
-                    <button class="btn-carbon-hover">AGREGAR 🛒</button>
+                    <button class="btn-carbon-hover" onclick="addToCart('Set de Postales', 15000)">AGREGAR 🛒</button>
                 </div>
             </div>
         </div>
@@ -155,7 +155,7 @@
                 <p class="producto-desc">Lleva el gran combo de fanzine y postales a un mejor precio.</p>
                 <div class="producto-compra">
                     <span class="producto-precio">$35.000</span>
-                    <button class="btn-carbon-hover">AGREGAR 🛒</button>
+                    <button class="btn-carbon-hover" onclick="addToCart('El Combo', 35000)">AGREGAR 🛒</button>
                 </div>
             </div>
         </div>
@@ -201,6 +201,24 @@
     </button>
   </div>
 </footer>
+
+<button class="cart-floating-btn" id="cartBtn">
+    <span class="cart-icon">🛒</span>
+    <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<div class="cart-modal" id="cartModal">
+    <div class="cart-header">
+        <h3>TU CANASTO</h3>
+        <button id="closeCart">×</button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+        </div>
+    <div class="cart-footer">
+        <div class="cart-total">TOTAL: <span id="cartTotal">$0</span></div>
+        <a href="checkout.html" class="btn-submit-foto-muro">PAGAR AHORA</a>
+    </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>

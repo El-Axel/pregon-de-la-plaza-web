@@ -4055,3 +4055,146 @@ p, h1, h2, h3, .texto-informativo {
     grid-template-columns: 1fr;
   }
 }
+
+/* Botón Flotante */
+.cart-floating-btn {
+    position: fixed; bottom: 30px; right: 30px; z-index: 3000;
+    width: 70px; height: 70px; background: var(--yellow);
+    border: 4px solid var(--carbon); box-shadow: 8px 8px 0px var(--carbon);
+    cursor: pointer; font-size: 24px; transition: transform 0.3s;
+}
+.cart-floating-btn:hover { transform: translateY(-5px); }
+.cart-count {
+    position: absolute; top: -10px; right: -10px;
+    background: var(--red); color: white; border-radius: 50%;
+    width: 25px; height: 25px; font-size: 14px; font-weight: bold;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* Modal Carrito */
+/* Busca el .cart-items y .cart-modal y déjalos así: */
+.cart-modal {
+    position: fixed; bottom: 120px; right: 30px; width: 350px;
+    background: var(--bone); border: 4px solid var(--carbon);
+    box-shadow: 15px 15px 0px var(--carbon); z-index: 2999;
+    padding: 20px; display: none;
+    max-height: 500px; /* Evita que crezca infinitamente */
+}
+
+.cart-items { 
+    max-height: 300px; 
+    overflow-y: auto; 
+    margin-bottom: 20px;
+    display: flex; 
+    flex-direction: column;
+    gap: 10px; /* Espacio entre productos */
+}
+
+/* Estilo de cada producto dentro del carrito */
+.cart-item { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-bottom: 10px; 
+    font-family: var(--font-body);
+    color: var(--carbon) !important; /* ¡FUERZA EL TEXTO A NEGRO! */
+    font-weight: bold;
+    border-bottom: 1px dashed var(--carbon);
+    padding-bottom: 5px;
+}
+
+/* Y también arreglemos el título "TU CANASTO" que seguro no se ve */
+.cart-header h3 {
+    color: var(--carbon) !important;
+    font-family: var(--font-disp);
+}
+.cart-modal.open { display: block; }
+
+/* Contenedor que centra y limita el tamaño de la hoja de pedido */
+.checkout-container {
+    width: 100%;
+    max-width: 700px; /* Este es el tamaño perfecto, ni muy ancho ni muy angosto */
+    margin: 80px auto; /* Centra el contenedor automáticamente */
+    padding: 0 20px; /* Margen de seguridad para que no se pegue a los bordes en celular */
+}
+.resumen-pedido { margin-bottom: 20px; border-bottom: 2px solid var(--carbon); padding-bottom: 10px; }
+.btn-pay { width: 100%; padding: 20px; background: var(--carbon); color: white; border: none; cursor: pointer; font-weight: bold; }
+.btn-whatsapp { display: block; padding: 20px; background: #25D366; color: white; text-decoration: none; font-weight: bold; margin-top: 20px; }
+/* ==========================================================================
+   ESTILOS DE LA PASARELA DE PAGO (HOJA DE PEDIDO)
+   ========================================================================== */
+
+/* Contenedor principal de la hoja */
+.checkout-hoja-pedido {
+    color: var(--carbon) !important; /* Fuerza a que todo el texto herede el oscuro */
+}
+
+/* Títulos del checkout */
+.checkout-title {
+    font-family: var(--font-disp);
+    font-size: clamp(30px, 5vw, 45px);
+    color: var(--carbon);
+    margin: 20px 0;
+    text-transform: uppercase;
+}
+
+.checkout-subtitle {
+    font-family: var(--font-disp);
+    font-size: 20px;
+    color: var(--carbon);
+    margin: 20px 0 10px 0;
+}
+
+/* El bloque del resumen del carrito */
+.checkout-resumen-box {
+    margin-bottom: 30px;
+    border-bottom: 4px solid var(--carbon);
+    padding-bottom: 20px;
+    color: var(--carbon);
+}
+
+.checkout-resumen-list {
+    list-style: none;
+    font-family: monospace;
+    font-size: 18px;
+    color: var(--carbon);
+}
+
+.checkout-resumen-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+/* Campos de formulario (Inputs) Brutalistas */
+.checkout-input {
+    width: 100%;
+    padding: 15px;
+    border: 3px solid var(--carbon);
+    margin-bottom: 15px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    color: var(--carbon); /* Color del texto cuando el usuario escribe */
+    background-color: transparent;
+    outline: none;
+}
+
+.checkout-input::placeholder {
+    color: var(--carbon-light); /* Color del texto fantasma */
+    font-weight: 500;
+}
+
+.checkout-input:focus {
+    background-color: rgba(var(--rgb-yellow), 0.1);
+    border-color: var(--red);
+}
+
+/* Grilla para la tarjeta (MM/AA, CVC, DNI) */
+.checkout-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.checkout-grid-3 .checkout-input {
+    margin-bottom: 0; /* Anula el margen inferior para que cuadre en la grilla */
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Hoja de Pedido | Pregón de la Plaza</title>
+</head>
+<body style="background: var(--bone);">
+
+<div class="checkout-container">
+    
+    <div class="plaza-folder-card checkout-hoja-pedido" style="padding: 50px; background: white;">
+        <div id="paymentForm">
+            <span class="tag-sticker bg-red text-bone">HOJA DE PEDIDO #001</span>
+            <h1 class="checkout-title">CONFIRMAR CANASTO</h1>
+            
+            <div id="resumenCheckout" class="checkout-resumen-box">
+                </div>
+
+            <h2 class="checkout-subtitle">DATOS DEL VECINO:</h2>
+            <input type="text" id="userName" class="checkout-input" placeholder="NOMBRE COMPLETO">
+            <input type="email" id="userEmail" class="checkout-input" placeholder="CORREO ELECTRÓNICO">
+            <input type="tel" id="userPhone" class="checkout-input" placeholder="TELÉFONO">
+
+            <h2 class="checkout-subtitle">DATOS DE PAGO:</h2>
+            <input type="text" id="cardNum" class="checkout-input" placeholder="NÚMERO DE TARJETA">
+            
+            <div class="checkout-grid-3">
+                <input type="text" class="checkout-input" placeholder="MM/AA">
+                <input type="text" class="checkout-input" placeholder="CVC">
+                <input type="text" class="checkout-input" placeholder="DNI/NIT">
+            </div>
+            
+            <button class="btn-submit-foto-muro" onclick="procesarPago()">PAGAR AHORA</button>
+        </div>
+
+        <div id="successMsg" style="display: none; text-align: center;">
+            <h1 class="checkout-title" style="color: var(--green);">¡PEDIDO PROCESADO!</h1>
+            <p style="font-family: var(--font-body); font-size: 18px; margin: 20px 0;">Tu mercado está siendo preparado. Dale al botón para confirmar con nosotros.</p>
+            <a href="#" id="btnWhatsAppFinal" class="btn-submit-foto-muro" style="display: block; background: #25D366 !important; border-color: #128C7E !important; color: white !important;">CONFIRMAR POR WHATSAPP</a>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+    // 1. Traer los datos del carrito guardados
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const total = cart.reduce((sum, item) => sum + item.precio, 0);
+    
+    // 2. Inyectar el resumen visual en la hoja de pedido
+    let html = '<ul class="checkout-resumen-list">';
+    cart.forEach(item => {
+        html += `<li class="checkout-resumen-item"><span>${item.nombre}</span> <b>$${item.precio.toLocaleString()}</b></li>`;
+    });
+    html += `</ul><div class="checkout-title" style="margin-top:20px; font-size: 24px;">TOTAL: $${total.toLocaleString()}</div>`;
+    document.getElementById('resumenCheckout').innerHTML = html;
+
+    // 3. La función que procesa el pago y arma el WhatsApp
+    function procesarPago() {
+        // Ocultar formulario y mostrar mensaje de éxito
+        document.getElementById('paymentForm').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+        
+        // Capturar los datos del usuario
+        const nombre = document.getElementById('userName').value || "Vecino";
+        const correo = document.getElementById('userEmail').value || "No especificado";
+        const telefono = document.getElementById('userPhone').value || "No especificado";
+        
+        // Armar la lista de productos en texto
+        const listaProductos = cart.map(item => `- ${item.nombre}: $${item.precio.toLocaleString()}`).join('\n');
+        
+        // Construir el mensaje completo
+        const mensaje = `¡Hola! Acabo de realizar mi compra en La Chaza:\n\n` +
+                        `*DATOS DEL VECINO:*\n` +
+                        `Nombre: ${nombre}\n` +
+                        `Correo: ${correo}\n` +
+                        `Teléfono: ${telefono}\n\n` +
+                        `*MI PEDIDO:*\n` +
+                        `${listaProductos}\n\n` +
+                        `*TOTAL A PAGAR:* $${total.toLocaleString()}\n\n` +
+                        `Quedo pendiente de la confirmación. ¡Gracias!`;
+        
+        // Inyectar el enlace de WhatsApp al botón verde (usamos encodeURIComponent para que los espacios y saltos de línea no se rompan)
+        const numeroWhatsApp = "573042969936"; // Tu número con el indicativo de Colombia
+        document.getElementById('btnWhatsAppFinal').href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+    }
+</script>
+</body>
+</html>
