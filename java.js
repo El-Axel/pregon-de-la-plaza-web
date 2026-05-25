@@ -582,10 +582,18 @@ document.addEventListener('DOMContentLoaded', () => {
             btnAbrir.addEventListener('click', () => modalUpload.classList.add('is-open'));
             btnCerrar.addEventListener('click', () => modalUpload.classList.remove('is-open'));
 
-            const triggerFileInput = (e) => { e.preventDefault(); fileInputReal.click(); };
-            
-            dropzoneContainer.addEventListener('click', triggerFileInput);
-            btnExplorarReal.addEventListener('click', (e) => { e.stopPropagation(); fileInputReal.click(); });
+            // El botón específico abre el explorador
+btnExplorarReal.addEventListener('click', (e) => { 
+    e.stopPropagation(); // Evita que el clic suba a la caja y cause estragos
+    fileInputReal.click(); 
+});
+
+// Toda la caja también abre el explorador (sin hacer bucle infinito)
+dropzoneContainer.addEventListener('click', (e) => { 
+    // Si el clic vino del input o del botón, frenamos para no causar un bucle
+    if (e.target === fileInputReal || e.target === btnExplorarReal) return;
+    fileInputReal.click(); 
+});
 
             fileInputReal.addEventListener('change', function() {
                 if (this.files && this.files[0]) procesarArchivo(this.files[0]);

@@ -3853,7 +3853,7 @@ p, h1, h2, h3, .texto-informativo {
 .plazas-page-intro {
   font-size: 19px;
   max-width: 650px;
-  margin: 0 auto;
+  margin: 50px;
   color: var(--bone);
   line-height: 1.6;
   opacity: 0.9;
