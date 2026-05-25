@@ -151,26 +151,17 @@
           <div class="slide-layout border-carbon">
             <div class="slide-texto bg-yellow">
               <span class="cap-num text-carbon">EPISODIO 1 DE 3</span>
-              <h3 class="cap-cita text-carbon">"La plaza es mi casa, aquí crie a mis hijos."</h3>
-              <div class="cap-personaje"><span class="accent-red text-bold">/// DOÑA LUZ</span> - IMPALA</div>
-              <p class="cap-contexto text-carbon">Una mirada íntima a la resistencia y el trato humano. Cómo un puesto de plantas medicinales se convierte en el consultorio de todo un barrio.</p>
+              <h3 class="cap-cita text-carbon">"La Corona Del Impala"</h3>
+              <div class="cap-personaje"><span class="accent-red text-bold">/// DIEGO</span> - IMPALA</div>
+              <p class="cap-contexto text-carbon">Entre el filo del machete y el dulce de la fruta. Acompañamos la jornada de un vendedor de piñas en la minorista Impala, un oficio donde la destreza dicta la técnica y la calle forja la corona del trabajo diario.</p>
             </div>
             <div class="slide-video bg-carbon">
-              <div class="video-placeholder text-bone">IFRAME FB EP 1</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carrusel-slide">
-          <div class="slide-layout border-carbon">
-            <div class="slide-texto bg-red">
-              <span class="cap-num text-yellow">EPISODIO 2 DE 3</span>
-              <h3 class="cap-cita text-bone">"El que no madruga a las 3 AM, no sabe qué es trabajar."</h3>
-              <div class="cap-personaje"><span class="accent-yellow text-bold">/// DON ARTURO</span> - MERCASA</div>
-              <p class="cap-contexto text-bone">Acompañamos a los coteros que mueven las toneladas de comida antes de que salga el sol. La logística que alimenta a la ciudad entera.</p>
-            </div>
-            <div class="slide-video bg-carbon">
-              <div class="video-placeholder text-bone">IFRAME FB EP 2</div>
+              <div class="video-thumb-container" data-video-id="WhC5CRB-LME">
+                <img src="imagenes/portada1.png" alt="Miniatura Episodio 1" class="video-thumb-img">
+                <div class="play-badge">
+                  <span class="play-triangle">▶</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -178,13 +169,37 @@
         <div class="carrusel-slide">
           <div class="slide-layout border-carbon">
             <div class="slide-texto bg-green">
-              <span class="cap-num text-bone">EPISODIO 3 DE 3</span>
-              <h3 class="cap-cita text-bone">"Aquí todos somos familia, en las buenas y en las malas."</h3>
-              <div class="cap-personaje"><span class="accent-yellow text-bold">/// DOÑA CARMEN</span> - SANTA ROSA</div>
-              <p class="cap-contexto text-bone">Las dinámicas de comunidad. Cómo los pasillos de la plaza reemplazan a los lazos de sangre y forman un tejido de apoyo inquebrantable.</p>
+              <span class="cap-num text-yellow">EPISODIO 2 DE 3</span>
+              <h3 class="cap-cita text-bone">"El Peso Del Canasto"</h3>
+              <div class="cap-personaje"><span class="accent-yellow text-bold">///JOSÉ NICOLAS</span> - MERCASA</div>
+              <p class="cap-contexto text-bone">Más que un espacio de trabajo, una herencia de sangre. Descubre cómo una familia entera entrelaza su vida con la exigente dinámica de Mercasa, demostrando que el peso de la madrugada se aliviana cuando se carga entre los tuyos.</p>
             </div>
             <div class="slide-video bg-carbon">
-              <div class="video-placeholder text-bone">IFRAME FB EP 3</div>
+              <div class="video-thumb-container" data-video-id="OrRZt27Jv94">
+                <img src="imagenes/portada2.png" alt="Miniatura Episodio 2" class="video-thumb-img">
+                <div class="play-badge">
+                  <span class="play-triangle">▶</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carrusel-slide">
+          <div class="slide-layout border-carbon">
+            <div class="slide-texto bg-red">
+              <span class="cap-num text-bone">EPISODIO 3 DE 3</span>
+              <h3 class="cap-cita text-bone">"La Plaza Que Heredamos"</h3>
+              <div class="cap-personaje"><span class="accent-yellow text-bold">///JOSÉ MIGUEL</span> - IMPALA</div>
+              <p class="cap-contexto text-bone">Dos mundos, una misma raíz. La historia de un joven universitario que equilibra los apuntes de la academia con los pasillos del mercado, demostrando que la plaza es, en sí misma, una escuela viva de resistencia y futuro.</p>
+            </div>
+            <div class="slide-video bg-carbon">
+              <div class="video-thumb-container" data-video-id="qXu39jY1xsg">
+                <img src="imagenes/portada3.png" alt="Miniatura Episodio 3" class="video-thumb-img">
+                <div class="play-badge">
+                  <span class="play-triangle">▶</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -201,6 +216,15 @@
     <span class="dot"></span>
   </div>
 </section>
+
+<div class="video-modal-overlay" id="videoModalOverlay">
+    <div class="video-modal-box">
+        <button class="modal-close-btn" id="btnCerrarVideo">×</button>
+        <div class="video-iframe-container">
+            <iframe id="videoModalIframe" src="" frameborder="0" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
 
 <section class="podcast-section gsap-reveal">
   <div class="podcast-bg-pattern"></div>

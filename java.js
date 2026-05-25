@@ -817,4 +817,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ============================================
+    // 19. POPUP DE VIDEO PARA DOCUMENTALES
+    // ============================================
+    const videoModalOverlay = document.getElementById('videoModalOverlay');
+    const btnCerrarVideo = document.getElementById('btnCerrarVideo');
+    const videoModalIframe = document.getElementById('videoModalIframe');
+    const videoThumbs = document.querySelectorAll('.video-thumb-container');
+
+    if (videoModalOverlay && btnCerrarVideo && videoModalIframe) {
+        
+        // Al hacer clic en cualquier miniatura
+        videoThumbs.forEach(thumb => {
+            thumb.addEventListener('click', () => {
+                const videoId = thumb.getAttribute('data-video-id');
+                // Inyectamos el ID y forzamos el autoplay
+                videoModalIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+                videoModalOverlay.classList.add('is-open');
+            });
+        });
+
+        // Función para apagar y cerrar
+        const cerrarVideo = () => {
+            videoModalOverlay.classList.remove('is-open');
+            // Quitamos el src después de la animación para que el audio no siga sonando de fondo
+            setTimeout(() => { videoModalIframe.src = ""; }, 400); 
+        };
+
+        btnCerrarVideo.addEventListener('click', cerrarVideo);
+        
+        // Si hacen clic en lo oscuro (afuera del video), también se cierra
+        videoModalOverlay.addEventListener('click', (e) => {
+            if(e.target === videoModalOverlay) cerrarVideo();
+        });
+    }
+
 // ¡AQUÍ SE ACABA TU ARCHIVO JAVA.JS! NO PONGAS ABSOLUTAMENTE NADA MÁS ABAJO.
