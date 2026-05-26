@@ -577,7 +577,7 @@ p, h1, h2, h3, .texto-informativo {
 }
 
 .fruit-icon {
-  width: 65px; /* Tamaño más grande */
+  width: 75px; /* Tamaño más grande */
   height: auto;
   /* Sombra sólida brutalista usando la variable carbón */
   filter: drop-shadow(4px 4px 0px var(--carbon)); 
@@ -589,7 +589,7 @@ p, h1, h2, h3, .texto-informativo {
 .fruit-trigger:hover .fruit-icon {
   transform: scale(1.15) rotate(12deg); /* Crece un poquito más y gira */
   /* La sombra cambia al amarillo de abundancia */
-  filter: drop-shadow(6px 6px 0px var(--yellow)); 
+  filter: drop-shadow(6px 6px 0px var(--green)); 
 }
 
 /* Etiqueta flotante estilo "Documental" */
@@ -3271,22 +3271,37 @@ p, h1, h2, h3, .texto-informativo {
 }
 
 /* Quitamos todos los fondos y bordes */
-.btn-muro-nav {
-  background: transparent;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: url('IMAGENES/fresa-cursor.png') 16 16, pointer !important;
+/* ============================================
+   TEXTOS SINESTÉSICOS EN HEADER (Ajuste Final 2.0)
+   ============================================ */
+
+/* ============================================
+   TEXTOS SINESTÉSICOS EN HEADER (Ajuste Final 3.0)
+   ============================================ */
+
+/* Estilo Base */
+.brutal-text {
+    font-family: var(--font-disp), sans-serif;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    pointer-events: none;
+    white-space: nowrap;
 }
 
-/* Diseñamos la canasta para que haga juego con el tomate */
+/* --- Canasta (Galería) --- */
+.btn-muro-nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Diseñamos la canasta a 85px para que empate con el tomate de 90px */
 .icono-canasta {
-  width: 70px; /* Un tamaño grande para que tenga peso visual */
+  width: 85px; 
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(4px 4px 0px var(--carbon)); /* Sombra brutalista */
+  filter: drop-shadow(4px 4px 0px var(--carbon)); 
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease;
   transform-origin: center;
 }
@@ -3294,7 +3309,47 @@ p, h1, h2, h3, .texto-informativo {
 /* Animación al pasar el mouse (crece, rota y la sombra se vuelve amarilla) */
 .btn-muro-nav:hover .icono-canasta {
   transform: scale(1.15) rotate(-10deg);
-  filter: drop-shadow(6px 6px 0px var(--yellow));
+  filter: drop-shadow(6px 6px 0px var(--red));
+}
+
+/* Corrección de la Etiqueta: Más grande, afuera de la caja y con el ángulo exacto */
+.etiqueta-galeria {
+    color: var(--yellow);
+    font-size: 15px; /* Letra más grande */
+    position: absolute;
+    left: -10px; /* La empujamos bien a la izquierda para que NO tape la canasta */
+    top: 38px;   /* La subimos para que encaje en el borde superior izquierdo */
+    transform: rotate(45deg); /* Inclinación de bajada \ */
+    z-index: 10;
+    text-shadow: 3px 3px 0px var(--carbon); 
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-muro-nav:hover .etiqueta-galeria {
+    /* Como la canasta rota -10deg en hover, le restamos eso a nuestros 32deg = 22deg */
+    transform: scale(1.15) rotate(22deg); 
+    left: -15px; /* Se aleja un milímetro al crecer para seguir sin tapar */
+    filter: drop-shadow(6px 6px 0px var(--red));
+}
+
+/* --- Tomate (Menú) - Texto Curvo --- */
+.fruit-trigger {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    pointer-events: auto;
+    position: relative;
+}
+
+/* Texto del Tomate Gigante y Visible */
+.texto-curvo-svg {
+    font-family: var(--font-disp), sans-serif;
+    font-size: 35px; /* MUCHO más grande */
+    font-weight: 800;
+    fill: var(--yellow); 
+    letter-spacing: 2px;
+    filter: drop-shadow(3px 3px 0px rgba(53, 53, 53, 0.9)); 
 }
 
 /* Ajustes para móviles */
@@ -4294,3 +4349,4 @@ p, h1, h2, h3, .texto-informativo {
 .video-iframe-container iframe {
     width: 100%; height: 100%; border: none;
 }
+
