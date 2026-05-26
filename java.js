@@ -655,10 +655,21 @@ dropzoneContainer.addEventListener('click', (e) => {
                     const autorVal = document.getElementById('formAutor').value || "Vecino Anónimo";
                     const notaVal = document.getElementById('formNota').value || "Sin palabras, solo la memoria viva de nuestra plaza.";
                     
-                    // 1. SUBIR FOTO A STORAGE
-                    const nombreUnico = 'muro/' + Date.now() + '_' + file.name;
+                    // 1. COMPRIMIR Y SUBIR FOTO A STORAGE
+                    const opcionesCompresion = {
+                        maxSizeMB: 0.3, // Forzamos a que no pase de 300 KB
+                        maxWidthOrHeight: 1200,
+                        useWebWorker: true
+                    };
+                    
+                    // La librería exprime la foto antes de enviarla
+                    const archivoComprimido = await imageCompression(file, opcionesCompresion);
+                    
+                    const nombreUnico = 'muro/' + Date.now() + '_' + archivoComprimido.name;
                     const archivoRef = ref(storage, nombreUnico);
-                    await uploadBytes(archivoRef, file);
+                    
+                    // Subimos el archivo ligero
+                    await uploadBytes(archivoRef, archivoComprimido);
                     const urlDescarga = await getDownloadURL(archivoRef); // Obtenemos el link público
 
                     // 2. GENERAR COORDENADAS ALEATORIAS
