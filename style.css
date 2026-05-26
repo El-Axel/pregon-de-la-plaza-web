@@ -3430,7 +3430,7 @@ p, h1, h2, h3, .texto-informativo {
 .lienzo-infinito {
   position: absolute; inset: 0;
   width: 100vw; height: 100vh;
-  overflow: hidden;
+  overflow: scroll;  /* ← único cambio */
   cursor: url('imagenes/fresa-cursor.png') 16 16, grab;
 }
 .lienzo-infinito:active { cursor: url('imagenes/fresa-cursor.png') 16 16, grabbing; }
@@ -4468,3 +4468,57 @@ p, h1, h2, h3, .texto-informativo {
     .etiqueta-galeria { top: 20px !important; font-size: 9px !important; }
     .terminal-title { font-size: 45px !important; }
 }
+
+/* ============================================================
+   PARCHE MÓVIL — BOTONES DE ZOOM FLOTANTES
+   Pega esto al final de tu style.css
+   Solo se muestran en móvil (max-width: 768px)
+   ============================================================ */
+
+/* Instrucción de uso para móvil: reemplaza el texto del panel */
+@media (max-width: 768px) {
+  .galeria-instruction .desktop-hint { display: none; }
+  .galeria-instruction .mobile-hint  { display: inline; }
+}
+.galeria-instruction .mobile-hint { display: none; }
+
+/* Botones flotantes de zoom */
+.zoom-controls-mobile {
+  display: none; /* ocultos por defecto en escritorio */
+  position: fixed;
+  bottom: 110px;
+  right: 20px;
+  z-index: 200;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .zoom-controls-mobile {
+    display: flex;
+  }
+}
+
+.zoom-controls-mobile button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid var(--carbon);
+  background: var(--yellow);
+  color: var(--carbon);
+  font-family: var(--font-disp);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px var(--carbon);
+  transition: transform 0.1s, box-shadow 0.1s;
+  /* Área táctil más grande sin agrandar el botón visualmente */
+  touch-action: manipulation;
+}
+
+.zoom-controls-mobile button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0px var(--carbon);
+}
+

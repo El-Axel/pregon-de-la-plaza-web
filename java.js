@@ -449,9 +449,32 @@ document.addEventListener('DOMContentLoaded', () => {
         let scaleFactor = 1;
         let mouseStartClickX, mouseStartClickY;
 
-        // 1. Centrar la cámara
-        lienzoMuro.scrollLeft = (muroContenido.scrollWidth - lienzoMuro.clientWidth) / 2;
-        lienzoMuro.scrollTop = (muroContenido.scrollHeight - lienzoMuro.clientHeight) / 2;
+    // 1. Centrar la cámara (adaptado al dispositivo)
+const esMobil = window.innerWidth <= 768;
+scaleFactor = esMobil ? 0.30 : 1;
+muroContenido.style.transformOrigin = 'center center';
+muroContenido.style.transform = `scale(${scaleFactor})`;
+
+requestAnimationFrame(() => {
+    lienzoMuro.scrollLeft = (muroContenido.offsetWidth  - lienzoMuro.clientWidth)  / 2;
+    lienzoMuro.scrollTop  = (muroContenido.offsetHeight - lienzoMuro.clientHeight) / 2;
+});
+
+// REDISTRIBUCIÓN MÓVIL: expande las fotos en un área más amplia del lienzo
+if (esMobil) {
+    const tarjetas = muroContenido.querySelectorAll('.card-foto-fanzine');
+    tarjetas.forEach(tarjeta => {
+        const topActual  = parseFloat(tarjeta.style.top);
+        const leftActual = parseFloat(tarjeta.style.left);
+
+        // Mapea el rango 34–64% → 15–85% para dar más espacio entre fotos
+        const nuevoTop  = 15 + ((topActual  - 34) / 30) * 70;
+        const nuevoLeft = 15 + ((leftActual - 34) / 30) * 70;
+
+        tarjeta.style.top  = nuevoTop  + '%';
+        tarjeta.style.left = nuevoLeft + '%';
+    });
+}
 
         // 2. LÓGICA DE AGARRAR Y ARRASTRAR EL LIENZO (DRAG & PAN)
         lienzoMuro.addEventListener('mousedown', (e) => {
@@ -482,12 +505,162 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // 3. LÓGICA DE ZOOM CON LA RUEDA DEL RATÓN
-        lienzoMuro.addEventListener('wheel', (e) => {
+       lienzoMuro.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    scaleFactor += e.deltaY * -0.0015;
+    scaleFactor = Math.min(Math.max(0.45, scaleFactor), 1.8);
+    muroContenido.style.transform = `scale(${scaleFactor})`;
+}, { passive: false });
+
+        // ============================================================
+// PARCHE MÓVIL PARA EL MURO COLECTIVO
+// Pega este bloque DENTRO de tu sección "17. MOTOR INTERACTIVO"
+// en java.js, JUSTO DESPUÉS del bloque de wheel (zoom con ratón).
+//
+// Busca esta línea en java.js:
+//   }, { passive: false });
+// (el cierre del lienzoMuro.addEventListener('wheel', ...))
+// y pega TODO lo que sigue abajo inmediatamente después.
+// ============================================================
+
+        // ============================================================
+        // TÁCTIL 1: PAN CON UN DEDO (reemplaza el mousedown/mousemove)
+        // ============================================================
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchScrollLeft = 0;
+        let touchScrollTop = 0;
+        let isTouchDragging = false;
+        let touchStartClientX = 0; // para distinguir tap vs drag
+        let touchStartClientY = 0;
+
+        lienzoMuro.addEventListener('touchstart', (e) => {
+            // Solo manejamos un dedo aquí (el pinch lo maneja el bloque de abajo)
+            if (e.touches.length === 1) {
+                isTouchDragging = true;
+                const touch = e.touches[0];
+                touchStartX = touch.pageX - lienzoMuro.offsetLeft;
+                touchStartY = touch.pageY - lienzoMuro.offsetTop;
+                touchScrollLeft = lienzoMuro.scrollLeft;
+                touchScrollTop = lienzoMuro.scrollTop;
+                touchStartClientX = touch.clientX;
+                touchStartClientY = touch.clientY;
+            }
+        }, { passive: true });
+
+        lienzoMuro.addEventListener('touchmove', (e) => {
+            if (!isTouchDragging || e.touches.length !== 1) return;
+            e.preventDefault(); // Bloquea el scroll nativo del body mientras paneamos
+            const touch = e.touches[0];
+            const x = touch.pageX - lienzoMuro.offsetLeft;
+            const y = touch.pageY - lienzoMuro.offsetTop;
+            const moveX = (x - touchStartX) * 1.5;
+            const moveY = (y - touchStartY) * 1.5;
+            lienzoMuro.scrollLeft = touchScrollLeft - moveX;
+            lienzoMuro.scrollTop  = touchScrollTop  - moveY;
+        }, { passive: false }); // passive:false obligatorio para poder usar preventDefault
+
+        lienzoMuro.addEventListener('touchend', (e) => {
+            isTouchDragging = false;
+
+            // Si el dedo apenas se movió (<10px) lo tratamos como un TAP (= click en fotos)
+            if (e.changedTouches.length === 1) {
+                const touch = e.changedTouches[0];
+                const diffX = Math.abs(touch.clientX - touchStartClientX);
+                const diffY = Math.abs(touch.clientY - touchStartClientY);
+
+                if (diffX < 10 && diffY < 10) {
+                    // Buscamos si el tap cayó encima de una tarjeta
+                    const tarjeta = touch.target.closest('.item-click-3d');
+                    if (tarjeta) {
+                        // Disparamos la misma lógica del proyector 3D
+                        const srcImagen = tarjeta.getAttribute('data-img');
+                        const autor     = tarjeta.getAttribute('data-autor');
+                        const nota      = tarjeta.getAttribute('data-nota');
+                        const bgClase   = tarjeta.getAttribute('data-bg');
+                        const textoClase= tarjeta.getAttribute('data-text-color');
+
+                        document.getElementById('p3dImg').setAttribute('src', srcImagen);
+                        document.getElementById('p3dAutor').innerText = autor ? autor.toUpperCase() : '';
+                        document.getElementById('p3dNota').innerText  = nota  ? `"${nota}"` : '';
+
+                        const dorso = document.getElementById('p3dBgColor');
+                        dorso.className = `proyector-face face-back ${bgClase || 'bg-yellow'} ${textoClase || 'text-carbon'}`;
+
+                        proyector3D.classList.add('activo');
+                    }
+                }
+            }
+        }, { passive: true });
+
+        // ============================================================
+        // TÁCTIL 2: ZOOM CON DOS DEDOS (PINCH TO ZOOM)
+        // Reemplaza el zoom de la rueda del ratón en móvil
+        // ============================================================
+        let lastPinchDist = null;
+
+        lienzoMuro.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                isTouchDragging = false; // cancelamos el pan si aparece un segundo dedo
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                lastPinchDist = Math.hypot(dx, dy);
+            }
+        }, { passive: true });
+
+        lienzoMuro.addEventListener('touchmove', (e) => {
+            if (e.touches.length !== 2 || lastPinchDist === null) return;
             e.preventDefault();
-            scaleFactor += e.deltaY * -0.0015;
-            scaleFactor = Math.min(Math.max(0.45, scaleFactor), 1.8);
+
+            const dx = e.touches[0].clientX - e.touches[1].clientX;
+            const dy = e.touches[0].clientY - e.touches[1].clientY;
+            const newDist = Math.hypot(dx, dy);
+
+            // Calculamos el delta relativo: cuánto cambió la distancia entre dedos
+            const delta = newDist - lastPinchDist;
+            scaleFactor += delta * 0.005; // sensibilidad del pinch
+            scaleFactor = Math.min(Math.max(0.45, scaleFactor), 1.8); // mismos límites que el wheel
+
             muroContenido.style.transform = `scale(${scaleFactor})`;
+            lastPinchDist = newDist; // actualizamos para el próximo frame
         }, { passive: false });
+
+        lienzoMuro.addEventListener('touchend', (e) => {
+            if (e.touches.length < 2) {
+                lastPinchDist = null; // reseteamos cuando levantan los dedos
+            }
+        }, { passive: true });
+
+        // ============================================================
+        // TÁCTIL 3: BOTONES DE ZOOM EN PANTALLA (OPCIONAL PERO RECOMENDADO)
+        // Agrega estos dos botones al HTML de galeria.html si los quieres:
+        //
+        //   <div class="zoom-controls-mobile">
+        //     <button id="btnZoomIn">+</button>
+        //     <button id="btnZoomOut">−</button>
+        //   </div>
+        //
+        // El CSS de ejemplo va en style.css (ver comentario al final del archivo).
+        // ============================================================
+        const btnZoomIn  = document.getElementById('btnZoomIn');
+        const btnZoomOut = document.getElementById('btnZoomOut');
+
+        if (btnZoomIn) {
+            btnZoomIn.addEventListener('click', () => {
+                scaleFactor = Math.min(scaleFactor + 0.15, 1.8);
+                muroContenido.style.transform = `scale(${scaleFactor})`;
+            });
+        }
+        if (btnZoomOut) {
+            btnZoomOut.addEventListener('click', () => {
+                scaleFactor = Math.max(scaleFactor - 0.15, 0.30);
+                muroContenido.style.transform = `scale(${scaleFactor})`;
+            });
+        }
+
+// ============================================================
+// FIN DEL PARCHE MÓVIL
+// ============================================================
 
         // 4. LÓGICA DEL PROYECTOR MULTIMEDIA 3D PARA FOTOS EXISTENTES
         const fotosMuro = document.querySelectorAll('.item-click-3d');
