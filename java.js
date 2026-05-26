@@ -1,3 +1,28 @@
+// ============================================
+// 0. CONFIGURACIÓN DE FIREBASE (NUBE)
+// ============================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDbsU57BGdJjnOV2hwMM74LAQelQL2oV9A",
+  authDomain: "pregon-plaza-db.firebaseapp.com",
+  databaseURL: "https://pregon-plaza-db-default-rtdb.firebaseio.com",
+  projectId: "pregon-plaza-db",
+  storageBucket: "pregon-plaza-db.firebasestorage.app",
+  messagingSenderId: "375292888813",
+  appId: "1:375292888813:web:8c23d988b51b1371b5aee4",
+  measurementId: "G-7HS26NBRBZ"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// AQUÍ SIGUE TU CÓDIGO NORMAL:
+// document.addEventListener('DOMContentLoaded', () => { ...
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // 1. REGISTRO DE PLUGINS GSAP
@@ -614,49 +639,103 @@ dropzoneContainer.addEventListener('click', (e) => {
                 dropzoneContent.style.display = 'none';
             }
 
-            btnPublicar.addEventListener('click', () => {
-                if (!uploadedImageUrl) { alert("¡Arrastra una imagen primero!"); return; }
+            // ==========================================
+            // NUEVO BOTÓN: SUBIR A LA NUBE Y DIBUJAR FOTO
+            // ==========================================
+            btnPublicar.addEventListener('click', async () => {
+                const file = fileInputReal.files[0];
+                if (!file) { alert("¡Arrastra una imagen primero!"); return; }
 
-                const autorVal = document.getElementById('formAutor').value || "Vecino Anónimo";
-                const notaVal = document.getElementById('formNota').value || "Sin palabras, solo la memoria viva de nuestra plaza.";
+                // Cambiamos el texto para que el usuario sepa que está cargando
+                const textoOriginal = btnPublicar.innerText;
+                btnPublicar.innerText = "SUBIENDO A LA NUBE... ⏳";
+                btnPublicar.disabled = true;
 
+                try {
+                    const autorVal = document.getElementById('formAutor').value || "Vecino Anónimo";
+                    const notaVal = document.getElementById('formNota').value || "Sin palabras, solo la memoria viva de nuestra plaza.";
+                    
+                    // 1. SUBIR FOTO A STORAGE
+                    const nombreUnico = 'muro/' + Date.now() + '_' + file.name;
+                    const archivoRef = ref(storage, nombreUnico);
+                    await uploadBytes(archivoRef, file);
+                    const urlDescarga = await getDownloadURL(archivoRef); // Obtenemos el link público
+
+                    // 2. GENERAR COORDENADAS ALEATORIAS
+                    const randTop = Math.floor(Math.random() * (56 - 44 + 1) + 44);
+                    const randLeft = Math.floor(Math.random() * (56 - 44 + 1) + 44);
+                    const randRot = Math.floor(Math.random() * (15 - (-15) + 1) + (-15));
+
+                    // 3. GUARDAR LOS DATOS EN LA BASE DE DATOS (FIRESTORE)
+                    await addDoc(collection(db, "fotos-muro"), {
+                        url: urlDescarga,
+                        autor: autorVal,
+                        nota: notaVal,
+                        top: randTop,
+                        left: randLeft,
+                        rot: randRot,
+                        timestamp: Date.now()
+                    });
+
+                    // 4. DIBUJARLA EN LA PANTALLA INMEDIATAMENTE
+                    crearTarjetaEnMuro(urlDescarga, autorVal, notaVal, randTop, randLeft, randRot);
+
+                    // 5. LIMPIAR EL FORMULARIO
+                    document.getElementById('formAutor').value = '';
+                    document.getElementById('formNota').value = '';
+                    uploadedImageUrl = null;
+                    imagePreview.src = '';
+                    imagePreview.style.display = 'none';
+                    dropzoneContent.style.display = 'flex';
+                    fileInputReal.value = ''; 
+                    modalUpload.classList.remove('is-open');
+
+                } catch (error) {
+                    console.error("Error en la nube:", error);
+                    alert("Hubo un error subiendo la foto. Revisa tu conexión.");
+                } finally {
+                    btnPublicar.innerText = textoOriginal;
+                    btnPublicar.disabled = false;
+                }
+            });
+
+            // ==========================================
+            // FUNCIÓN QUE CONSTRUYE LAS TARJETAS (USADA AL SUBIR Y AL CARGAR)
+            // ==========================================
+            function crearTarjetaEnMuro(imgUrl, autor, nota, top, left, rot) {
                 const nuevaFoto = document.createElement('div');
-                // Le agregamos la clase "foto-personal" para que el JS sepa que esta SÍ se puede mover
                 nuevaFoto.className = "card-foto-fanzine item-click-3d polaroid-style foto-personal";
+                nuevaFoto.style = `top: ${top}%; left: ${left}%; transform: rotate(${rot}deg); z-index: 999;`;
                 
-                const randTop = Math.floor(Math.random() * (56 - 44 + 1) + 44);
-                const randLeft = Math.floor(Math.random() * (56 - 44 + 1) + 44);
-                const randRot = Math.floor(Math.random() * (15 - (-15) + 1) + (-15));
-                
-                nuevaFoto.style = `top: ${randTop}%; left: ${randLeft}%; transform: rotate(${randRot}deg); z-index: 999;`;
-                
-                nuevaFoto.setAttribute('data-img', uploadedImageUrl); 
-                nuevaFoto.setAttribute('data-autor', autorVal);
-                nuevaFoto.setAttribute('data-nota', notaVal);
+                nuevaFoto.setAttribute('data-img', imgUrl); 
+                nuevaFoto.setAttribute('data-autor', autor);
+                nuevaFoto.setAttribute('data-nota', nota);
                 nuevaFoto.setAttribute('data-bg', 'bg-yellow');
                 nuevaFoto.setAttribute('data-text-color', 'text-carbon');
 
                 nuevaFoto.innerHTML = `
                     <div class="card-frame">
-                        <img src="${uploadedImageUrl}" alt="Aporte" style="pointer-events: none; user-select: none;">
+                        <img src="${imgUrl}" alt="Aporte" style="pointer-events: none; user-select: none;">
                     </div>
-                    <span class="card-author accent-script">${autorVal}</span>
+                    <span class="card-author accent-script">${autor}</span>
                 `;
 
-                // Aquí le aplicamos el poder de ser arrastrada por todo el muro
                 HacerArrastrable(nuevaFoto);
-
                 muroContenido.appendChild(nuevaFoto);
+            }
 
-                document.getElementById('formAutor').value = '';
-                document.getElementById('formNota').value = '';
-                uploadedImageUrl = null;
-                imagePreview.src = '';
-                imagePreview.style.display = 'none';
-                dropzoneContent.style.display = 'flex';
-                fileInputReal.value = ''; 
-                modalUpload.classList.remove('is-open');
-            });
+            // ==========================================
+            // DESCARGAR LAS FOTOS VIEJAS AL ABRIR LA PÁGINA
+            // ==========================================
+            async function cargarFotosDeLaNube() {
+                const querySnapshot = await getDocs(collection(db, "fotos-muro"));
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    crearTarjetaEnMuro(data.url, data.autor, data.nota, data.top, data.left, data.rot);
+                });
+            }
+            // Llamamos a la función inmediatamente para que traiga el historial
+            cargarFotosDeLaNube();
         }
     }
 
@@ -800,6 +879,9 @@ dropzoneContainer.addEventListener('click', (e) => {
         updateCart();
         if(typeof gsap !== 'undefined' && cartBtn) gsap.fromTo(cartBtn, { scale: 1.2 }, { scale: 1, duration: 0.3 });
     }
+    
+    // 👇 ESTA LÍNEA NUEVA ES LA QUE ARREGLA EL PROBLEMA 👇
+    window.addToCart = addToCart;
 
     if(cartBtn) cartBtn.addEventListener('click', () => cartModal.classList.toggle('open'));
     const closeCart = document.getElementById('closeCart');
