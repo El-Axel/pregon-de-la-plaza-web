@@ -517,65 +517,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         proyector3D.addEventListener('click', () => { proyector3D.classList.remove('activo'); });
 
-        // --- SISTEMA DE ARRASTRE PARA FOTOS PERSONALES ---
         function HacerArrastrable(elemento) {
-            let isDraggingFoto = false;
-            let startX, startY, initialLeft, initialTop;
-
-            // Prevenimos que el clic 3D se dispare mientras arrastramos
-            let wasDragged = false;
-
-            elemento.addEventListener('mousedown', (e) => {
-                isDraggingFoto = true;
-                wasDragged = false;
-                
-                // Calculamos las coordenadas iniciales teniendo en cuenta el Zoom
-                startX = e.clientX;
-                startY = e.clientY;
-                
-                // Leemos el porcentaje actual del elemento
-                initialLeft = parseFloat(elemento.style.left);
-                initialTop = parseFloat(elemento.style.top);
-                
-                // Lo ponemos por encima de todas para arrastrarlo cómodo
-                elemento.style.zIndex = 3000;
-                elemento.style.cursor = "grabbing";
-                e.stopPropagation(); // Evitamos que el lienzo reciba el clic
-            });
-
-            window.addEventListener('mousemove', (e) => {
-                if (!isDraggingFoto) return;
-                wasDragged = true;
-                e.preventDefault();
-
-                // Calculamos cuánto se movió el mouse, ajustado por el nivel de zoom actual
-                const deltaX = (e.clientX - startX) / scaleFactor;
-                const deltaY = (e.clientY - startY) / scaleFactor;
-
-                // Convertimos esos píxeles a porcentaje del muro (500vw / 500vh)
-                const viewportWidth = window.innerWidth;
-                const viewportHeight = window.innerHeight;
-                
-                const percentX = (deltaX / (viewportWidth * 5)) * 100;
-                const percentY = (deltaY / (viewportHeight * 5)) * 100;
-
-                // Aplicamos la nueva posición
-                elemento.style.left = `${initialLeft + percentX}%`;
-                elemento.style.top = `${initialTop + percentY}%`;
-            });
-
-            window.addEventListener('mouseup', () => {
-                if (isDraggingFoto) {
-                    isDraggingFoto = false;
-                    elemento.style.zIndex = 999;
-                    elemento.style.cursor = "url('imagenes/limon-cursor.png') 16 16, pointer";
-                }
-            });
-
-            // Re-vinculamos el evento de clic al elemento personal
-            elemento.addEventListener('click', (e) => {
-                if (wasDragged) return; // Si lo soltó después de arrastrar, no abras el 3D
-
+            // Quitamos el drag para proteger el diseño del muro. 
+            // Conservamos el nombre de la función para no romper tu código.
+            
+            elemento.addEventListener('click', () => {
                 const srcImagen = elemento.getAttribute('data-img');
                 const autor = elemento.getAttribute('data-autor');
                 const nota = elemento.getAttribute('data-nota');
@@ -672,10 +618,40 @@ dropzoneContainer.addEventListener('click', (e) => {
                     await uploadBytes(archivoRef, archivoComprimido);
                     const urlDescarga = await getDownloadURL(archivoRef); // Obtenemos el link público
 
-                    // 2. GENERAR COORDENADAS ALEATORIAS
-                    const randTop = Math.floor(Math.random() * (56 - 44 + 1) + 44);
-                    const randLeft = Math.floor(Math.random() * (56 - 44 + 1) + 44);
-                    const randRot = Math.floor(Math.random() * (15 - (-15) + 1) + (-15));
+                   // 2. GENERAR COORDENADAS CON RADAR ANTI-CHOQUES
+                    let randTop, randLeft, randRot;
+                    let maxIntentos = 50; // Intenta buscar un hueco 50 veces
+                    let distanciaMinima = 6; // 6% de separación obligatoria entre fotos
+
+                    // Escaneamos dónde están las fotos actuales en el muro
+                    const fotosActuales = Array.from(document.querySelectorAll('.card-foto-fanzine')).map(foto => {
+                        return {
+                            top: parseFloat(foto.style.top),
+                            left: parseFloat(foto.style.left)
+                        };
+                    });
+
+                    // Buscamos un lugar seguro
+                    for (let i = 0; i < maxIntentos; i++) {
+                        randTop = Math.floor(Math.random() * (85 - 10 + 1) + 10);
+                        randLeft = Math.floor(Math.random() * (85 - 10 + 1) + 10);
+                        
+                        let choca = false;
+                        for (let pos of fotosActuales) {
+                            // Pitágoras básico para medir distancia entre dos puntos
+                            let distancia = Math.sqrt(Math.pow(pos.top - randTop, 2) + Math.pow(pos.left - randLeft, 2));
+                            if (distancia < distanciaMinima) {
+                                choca = true;
+                                break; // Está muy pegada, abortamos y tiramos los dados otra vez
+                            }
+                        }
+
+                        if (!choca) {
+                            break; // ¡Encontramos un hueco despejado!
+                        }
+                    }
+                    // La rotación sí sigue siendo totalmente al azar
+                    randRot = Math.floor(Math.random() * (25 - (-25) + 1) + (-25));
 
                     // 3. GUARDAR LOS DATOS EN LA BASE DE DATOS (FIRESTORE)
                     await addDoc(collection(db, "fotos-muro"), {
